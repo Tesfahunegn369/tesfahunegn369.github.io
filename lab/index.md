@@ -10,4 +10,4 @@ Welcome to the lab site. See Members and News pages for details.
 - [News](/lab/news.html)
 
 <!-- Include Lab Logo Image -->
-<img src="{{ '/assets/images/lab-log.png' | relative_url }}" alt="Lab Log" class="lab-logo">
+<img src="{{ '/assets/images/lablog.png' | relative_url }}" alt="Lab Log" class="lab-logo">

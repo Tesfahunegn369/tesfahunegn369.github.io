@@ -33,11 +33,11 @@ main {
 }
 
 .profile-photo {
-  width: 15px; /* Adjust size */
-  height: 15px; /* Maintain aspect ratio */
-  border-radius: 5%; /* Circular photo */
+  width: 50px; /* Adjust size */
+  height: 50px; /* Maintain aspect ratio */
+  border-radius: 25%; /* Circular photo */
   object-fit: cover; /* Ensures image doesn’t stretch */
-  margin: 5px 0; /* Space around the image */
+  margin: 15px 0; /* Space around the image */
 }
 
 .contact-photo {
@@ -55,10 +55,10 @@ main {
 }
 
 .lab-logo {
-  max-width: 200px;   /* Set the max-width of the image */
+  max-width: 50px;   /* Set the max-width of the image */
   height: auto;       /* Maintain aspect ratio */
   display: block;     /* Ensures the image is displayed as a block element */
-  margin: 20px 0;     /* Adds space around the image */
+  margin: 100px 0;     /* Adds space around the image */
   margin-left: auto;  /* Centers the image horizontally */
   margin-right: auto;
 }

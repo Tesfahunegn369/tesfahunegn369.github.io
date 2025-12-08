@@ -10,18 +10,18 @@ languages:
   - en
   - kr
 header_pages:
-  - index.md |
-  - publications.md |
-  - metrics.md |
-  - bibtex.md |
-  - grants.md |
-  - projects.md |
-  - courses/index.md |
-  - teaching.md |
-  - group.md |
-  - collaborations/index.md |
-  - blog.md |
-  - apply.md |
-  - cv.md |
-  - contact.md |
-  - lab/index.md |
+  - index.md
+  - publications.md
+  - metrics.md
+  - bibtex.md
+  - grants.md
+  - projects.md
+  - courses/index.md
+  - teaching.md
+  - group.md
+  - collaborations/index.md
+  - blog.md
+  - apply.md
+  - cv.md
+  - contact.md
+  - lab/index.md

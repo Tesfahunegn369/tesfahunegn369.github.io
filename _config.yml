@@ -5,7 +5,7 @@ url: https://YOUR_GITHUB_USERNAME.github.io
 baseurl: ""
 theme: minima
 markdown: kramdown
-google_analytics: G-XXXXXXXXXX
+google_analytics: G-QQQBB1D23W
 header_pages:
   - index.md
   - publications.md

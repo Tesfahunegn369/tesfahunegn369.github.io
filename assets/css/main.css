@@ -55,10 +55,10 @@ main {
 }
 
 .lab-logo {
-  max-width: 200px;   /* Set the max-width of the image */
+  max-width: 400px;   /* Set the max-width of the image */
   height: auto;       /* Maintain aspect ratio */
   display: block;     /* Ensures the image is displayed as a block element */
-  margin: 10px 0;     /* Adds space around the image */
+  margin: 5px 0;     /* Adds space around the image */
   margin-left: auto;  /* Centers the image horizontally */
   margin-right: auto;
 }

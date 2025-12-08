@@ -1,0 +1,24 @@
+title: Tesfahunegn Minwuyelet Mengistu
+description: PhD Candidate in Computer Engineering | Lecturer | Researcher
+author: Tesfahunegn M. Mengistu
+url: https://YOUR_GITHUB_USERNAME.github.io
+baseurl: ""
+theme: minima
+markdown: kramdown
+google_analytics: G-XXXXXXXXXX
+header_pages:
+  - index.md
+  - publications.md
+  - metrics.md
+  - bibtex.md
+  - grants.md
+  - projects.md
+  - courses/index.md
+  - teaching.md
+  - group.md
+  - collaborations/index.md
+  - blog.md
+  - apply.md
+  - cv.md
+  - contact.md
+  - lab/index.md

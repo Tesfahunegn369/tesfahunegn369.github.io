@@ -8,7 +8,7 @@ permalink: /
 
 <p class="justify-text">
   I am a <span class="bold-blue">PhD candidate in Computer Engineering at Pusan National University, Republic of Korea (since September 2023)</span>.  
-  Previously, I served as a <span class="bold-blue">Lecturer at the Faculty of Computing, Bahir Dar University, Ethiopia</span>.  
+  Previously, I served as a <span class="bold-blue">Lecturer and Resercher at the Faculty of Computing, Bahir Dar University, Ethiopia</span>.  
   I held leadership roles including Freshman Academic Program Coordinator (2019–2021), Vice Dean (2021–2023) and briefly Acting Dean (June 2023).
 </p>
 
@@ -22,3 +22,7 @@ permalink: /
 [<i class="fab fa-google"></i>](https://scholar.google.com/citations?user=qgSlPxcAAAAJ)
 [<i class="fas fa-globe"></i>](https://earthcharter.org/youngleaders/tesfahunegn-mengistu/)
 [<i class="fas fa-graduation-cap"></i>](https://globalscholarships.com/scholarship-posts/tesfahunegn-minwuyelet-mengistu/)
+<i class="fas fa-id-card"></i> (https://orcid.org/0000-0001-9385-1768)
+<a href="https://orcid.org/0000-0001-9385-1768" target="_blank">
+  <i class="fas fa-id-card"></i> ORCID
+</a>

@@ -33,11 +33,11 @@ main {
 }
 
 .profile-photo {
-  width: 150px; /* Adjust size */
-  height: 150px; /* Maintain aspect ratio */
-  border-radius: 50%; /* Circular photo */
+  width: 15px; /* Adjust size */
+  height: 15px; /* Maintain aspect ratio */
+  border-radius: 5%; /* Circular photo */
   object-fit: cover; /* Ensures image doesn’t stretch */
-  margin: 20px 0; /* Space around the image */
+  margin: 5px 0; /* Space around the image */
 }
 
 .contact-photo {

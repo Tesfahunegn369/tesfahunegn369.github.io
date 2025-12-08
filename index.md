@@ -22,7 +22,6 @@ permalink: /
 [<i class="fab fa-google"></i>](https://scholar.google.com/citations?user=qgSlPxcAAAAJ)
 [<i class="fas fa-globe"></i>](https://earthcharter.org/youngleaders/tesfahunegn-mengistu/)
 [<i class="fas fa-graduation-cap"></i>](https://globalscholarships.com/scholarship-posts/tesfahunegn-minwuyelet-mengistu/)
-<i class="fas fa-id-card"></i> (https://orcid.org/0000-0001-9385-1768)
 <a href="https://orcid.org/0000-0001-9385-1768" target="_blank">
   <i class="fas fa-id-card"></i> ORCID
 </a>

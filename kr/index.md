@@ -2,7 +2,7 @@
 layout: default
 title: 소개
 lang: kr
-permalink: /kr/
+permalink: kr.html
 ---
 
 # 테스파훈엥 민우에렛 멩기스투

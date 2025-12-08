@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>{{ page.title }} | {{ site.title }}</title>
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Main CSS -->
@@ -12,15 +12,17 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
-  <!-- Google Analytics GA4 -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-QQQBB1D23W"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-QQQBB1D23W');
-</script>
+  <!-- Font Awesome CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
+  <!-- Google Analytics GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QQQBB1D23W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QQQBB1D23W');
+  </script>
 </head>
 
 <body>
@@ -45,8 +47,13 @@
       {% endif %}
     {% endfor %}
     <span class="lang-switch">
-      <a href="{{ '/' | relative_url }}">EN</a>
-      <a href="{{ '/kr.html' | relative_url }}">KR</a>
+      {% if page.lang == 'kr' %}
+        <a href="{{ '/' | relative_url }}">EN</a> |
+        <a href="{{ '/kr.html' | relative_url }}" style="font-weight: bold;">KR</a>
+      {% else %}
+        <a href="{{ '/' | relative_url }}" style="font-weight: bold;">EN</a> |
+        <a href="{{ '/kr.html' | relative_url }}">KR</a>
+      {% endif %}
     </span>
   </div>
 </nav>

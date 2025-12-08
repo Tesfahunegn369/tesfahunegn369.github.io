@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 연구업적
+title: Publication
 ---
 # 연구업적
 

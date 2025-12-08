@@ -1,40 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ page.lang | default: 'en' }}">
 <head>
-<meta charset="UTF-8">
-<title>{{ page.title }} | {{ site.title }}</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-{% if site.google_analytics %}
-<script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config','{{ site.google_analytics }}');</script>
-{% endif %}
+  <meta charset="UTF-8">
+  <title>{{ page.title }} | {{ site.title }}</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- Google Analytics (GA4) -->
+  {% if site.google_analytics and site.google_analytics != "" %}
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{ site.google_analytics }}');
+  </script>
+  {% endif %}
 </head>
+
 <body>
+
 <header class="site-header">
   <div class="container">
-    <img src="/assets/images/lab-logo.png" alt="Logo" class="logo" onerror="this.style.display='none'">
+    <img src="{{ '/assets/images/lab-logo.png' | relative_url }}"
+         alt="Logo"
+         class="logo"
+         onerror="this.style.display='none'">
     <h1>{{ site.title }}</h1>
     <p>{{ site.description }}</p>
   </div>
 </header>
+
 <nav class="site-nav">
   <div class="container">
-    {% for page in site.header_pages %}
-      {% assign p = site.pages | where: "path", page | first %}
-      {% if p %}<a href="{{ p.url }}">{{ p.title }}</a>{% endif %}
+    {% for page_path in site.header_pages %}
+      {% assign nav_page = site.pages | where: "path", page_path | first %}
+      {% if nav_page %}
+        <a href="{{ nav_page.url | relative_url }}">{{ nav_page.title }}</a>
+      {% endif %}
     {% endfor %}
-    <span class="lang-switch"><a href="/">EN</a> | <a href="/_kr/">KR</a></span>
+    <span class="lang-switch">
+      <a href="{{ '/' | relative_url }}">EN</a> |
+      <a href="{{ '/_kr/' | relative_url }}">KR</a>
+    </span>
   </div>
 </nav>
+
 <main class="container">
-{{ content }}
+  {{ content }}
 </main>
+
 <footer class="site-footer">
   <div class="container">
-    <p>© {{ site.time | date: "%Y" }} {{ site.author }} • <a href="/contact.html">Contact</a></p>
+    <p>
+      © {{ site.time | date: "%Y" }} {{ site.author }}
+      • <a href="{{ '/contact.html' | relative_url }}">Contact</a>
+    </p>
   </div>
 </footer>
+
 </body>
 </html>

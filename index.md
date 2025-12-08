@@ -6,6 +6,9 @@ permalink: /
 ---
 # Tesfahunegn Minwuyelet Mengistu
 
+<!-- Add your photo -->
+<img src="{{ '/assets/images/TesPic.jpg' | relative_url }}" alt="Tesfahunegn Minwuyelet Mengistu" class="profile-photo">
+
 <p class="justify-text">
   I am a <span class="bold-blue">PhD candidate in Computer Engineering at Pusan National University, Republic of Korea (since September 2023)</span>.  
   Previously, I served as a <span class="bold-blue">Lecturer and Resercher at the Faculty of Computing, Bahir Dar University, Ethiopia</span>.  

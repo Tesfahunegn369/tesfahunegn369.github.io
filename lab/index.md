@@ -8,3 +8,6 @@ layout: default
 Welcome to the lab site. See Members and News pages for details.
 - [Members](/lab/members.html)
 - [News](/lab/news.html)
+
+<!-- Include Lab Logo Image -->
+<img src="{{ '/assets/images/lab-log.png' | relative_url }}" alt="Lab Log" class="lab-logo">

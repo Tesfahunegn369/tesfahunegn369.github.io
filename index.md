@@ -19,6 +19,6 @@ I am an **Earth Charter International Young Leader** and recipient of BK21 and S
 ### Contact & Profiles
 [<i class="fas fa-envelope"></i>](mailto:tesfahunegn9@pusan.ac.kr)
 [<i class="fab fa-linkedin"></i>](https://www.linkedin.com/in/tesfahunegn-minwuyelet-mengistu-85155a111)
-[<i class="fas fa-google"></i>](https://scholar.google.com/citations?user=qgSlPxcAAAAJ)
+[<i class="fab fa-google"></i>](https://scholar.google.com/citations?user=qgSlPxcAAAAJ)
 [<i class="fas fa-globe"></i>](https://earthcharter.org/youngleaders/tesfahunegn-mengistu/)
 [<i class="fas fa-graduation-cap"></i>](https://globalscholarships.com/scholarship-posts/tesfahunegn-minwuyelet-mengistu/)

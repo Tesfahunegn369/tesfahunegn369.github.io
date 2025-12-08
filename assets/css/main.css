@@ -21,3 +21,8 @@ footer{background:var(--primary);color:white;padding:20px;text-align:center}
 }
 code{background:#f4f4f4;padding:2px 4px;border-radius:3px}
 a.button{display:inline-block;padding:8px 12px;background:var(--secondary);color:white;border-radius:4px;text-decoration:none}
+
+/* Justify the text of the main content */
+main {
+  text-align: justify;
+}

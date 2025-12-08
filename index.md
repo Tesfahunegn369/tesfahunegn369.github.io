@@ -13,6 +13,7 @@ I held leadership roles including Freshman Academic Program Coordinator (2019–
 I am an **Earth Charter International Young Leader** and recipient of BK21 and Samil Cultural Foundation scholarships as noted in my scholarship profile. My interests include AI & Machine Learning, Ethical & Sustainable Computing, Software Engineering, and Higher Education systems.
 
 ### Contact & Profiles
+- Email: tesfahunegn [at] pusan [dot] ac[dot] kr
 - LinkedIn: [<i class="fab fa-linkedin"></i> Tesfahunegn Minwuyelet Mengistu](https://www.linkedin.com/in/tesfahunegn-minwuyelet-mengistu-85155a111)
 - Google Scholar: [<i class="fas fa-book"></i> Tesfahunegn Minwuyelet Mengistu](https://scholar.google.com/citations?user=qgSlPxcAAAAJ)
 - Earth Charter: [<i class="fab fa-globe"></i> Tesfahunegn Minwuyelet Mengistu](https://earthcharter.org/youngleaders/tesfahunegn-mengistu/)

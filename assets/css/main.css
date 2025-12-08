@@ -26,3 +26,8 @@ a.button{display:inline-block;padding:8px 12px;background:var(--secondary);color
 main {
   text-align: justify;
 }
+
+.bold-blue {
+  font-weight: bold;        /* Makes text bold */
+  color: #328cc1;           /* Makes text blue (you can adjust the shade as you like) */
+}

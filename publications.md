@@ -1,8 +1,6 @@
 ---
 layout: default
 title: 연구업적
-lang: kr
-permalink: /kr/publications.html
 ---
 # 연구업적
 

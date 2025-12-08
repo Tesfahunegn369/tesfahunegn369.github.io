@@ -5,10 +5,9 @@ layout: default
 
 ## Contact
 
-Email: tesfahunegn [at] pusan [dot] ac[dot] kr
+Email: | [<i class="fas fa-envelope"></i>](mailto:tesfahunegn9@pusan.ac.kr) |
 
 Profiles:
-| [<i class="fas fa-envelope"></i>](mailto:tesfahunegn@pusan.ac.kr) |
-[LinkedIn](https://www.linkedin.com/in/tesfahunegn-minwuyelet-mengistu-85155a111) |
+| [LinkedIn](https://www.linkedin.com/in/tesfahunegn-minwuyelet-mengistu-85155a111) |
 [Google Scholar ](https://scholar.google.com/citations?user=qgSlPxcAAAAJ) |
 [ORCiD](https://orcid.org/0000-0001-9385-1768) |

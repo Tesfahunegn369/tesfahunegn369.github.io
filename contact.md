@@ -5,7 +5,7 @@ layout: default
 
 ## Contact
 
-Email: tesfahunegn [at] pusan.ac.kr
+Email: tesfahunegn [at] pusan [dot] ac[dot] kr
 
 Profiles:
 - LinkedIn: https://www.linkedin.com/in/tesfahunegn-minwuyelet-mengistu-85155a111

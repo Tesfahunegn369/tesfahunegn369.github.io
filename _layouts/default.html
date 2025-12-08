@@ -45,8 +45,8 @@
       {% endif %}
     {% endfor %}
     <span class="lang-switch">
-      <a href="{{ '/' | relative_url }}">EN</a> |
-      <a href="{{ '/_kr/' | relative_url }}">KR</a>
+      <a href="{{ '/' | relative_url }}">EN</a>
+      <a href="{{ '/kr.html' | relative_url }}">KR</a>
     </span>
   </div>
 </nav>
@@ -59,7 +59,7 @@
   <div class="container">
     <p>
       © {{ site.time | date: "%Y" }} {{ site.author }}
-      • <a href="{{ '/contact.html' | relative_url }}">Contact</a>
+      • <a href="{{ '/contact.html' | relative_url }}">Contact</a>  {{ site.time | date: "%B %-d, %Y" }}
     </p>
   </div>
 </footer>

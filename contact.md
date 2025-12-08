@@ -8,5 +8,5 @@ layout: default
 Email: tesfahunegn [at] pusan [dot] ac[dot] kr
 
 Profiles:
-- LinkedIn: https://www.linkedin.com/in/tesfahunegn-minwuyelet-mengistu-85155a111
-- Google Scholar: https://scholar.google.com/citations?user=qgSlPxcAAAAJ
+[LinkedIn](https://www.linkedin.com/in/tesfahunegn-minwuyelet-mengistu-85155a111)
+[Google Scholar ](https://scholar.google.com/citations?user=qgSlPxcAAAAJ)

@@ -62,3 +62,30 @@ main {
   margin-left: auto;  /* Centers the image horizontally */
   margin-right: auto;
 }
+
+
+.profile-container {
+  display: flex;
+  align-items: center;  /* Vertically centers the content */
+  gap: 20px;  /* Adds space between the image and the text */
+}
+
+.profile-photo {
+  width: 120px;  /* Adjust the size of the photo */
+  height: 120px;  /* Adjust the size of the photo */
+  border-radius: 50%;  /* Makes the photo round */
+  object-fit: cover;  /* Ensures the image covers the area without stretching */
+}
+
+.profile-description {
+  max-width: 600px;  /* Optional: restricts the width of the text to keep it readable */
+}
+
+.justify-text {
+  text-align: justify;
+}
+
+.bold-blue {
+  font-weight: bold;
+  color: blue;
+}

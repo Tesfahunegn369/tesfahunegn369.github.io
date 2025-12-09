@@ -1,7 +1,7 @@
 import yaml, json, re
 from collections import defaultdict
 
-PUBS = "assets/data/publications.yml"
+PUBS = "_data/publications.yml"
 
 with open(PUBS, encoding="utf-8") as f:
     pubs = yaml.safe_load(f)

@@ -3,7 +3,7 @@ import yaml, re
 from collections import defaultdict
 
 SCHOLAR_ID = "qgSlPxcAAAAJ"
-YAML_FILE = "assets/data/publications.yml"
+YAML_FILE = "_data/publications.yml"
 
 def load_yaml():
     try:

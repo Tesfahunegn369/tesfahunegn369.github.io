@@ -1,0 +1,121 @@
+# _data/publications.yml
+# Auto-generated from Google Scholar: https://scholar.google.com/citations?user=qgSlPxcAAAAJ
+# Updated: December 09, 2025
+# Add PDFs/DOIs manually as needed
+
+2025:
+  - authors: "TM Mengistu; T Kim"
+    title: "Optimizing Federated Learning on Non-IID Data with Cosine Similarity-Driven Client Selection and Retraining"
+    venue: "IEEE"
+    year: 2025
+    doi: ""
+    pdf: ""
+    bibtex: "mengistu2025optimizing"
+    gs_id: ""
+    citations: 0
+    thumbnail: ""
+
+
+2024:
+  - authors: "TM Mengistu; T Kim; JW Lin"
+    title: "A Survey on Heterogeneity Taxonomy, Security and Privacy Preservation in the Integration of IoT, Wireless Sensor Networks and Federated Learning"
+    venue: "Sensors, 24(3)"
+    year: 2024
+    doi: ""
+    pdf: ""
+    bibtex: "mengistu2024survey"
+    gs_id: ""
+    citations: 57
+    thumbnail: ""
+
+  - authors: "TM Mengistu; JW Lin; PH Kuo; T Kim"
+    title: "Optimal Model Transfer and Dynamic Parameter Server Selection for Efficient Federated Learning in IoT-Edge Systems with Non-IID Data"
+    venue: "IEEE Access"
+    year: 2024
+    doi: ""
+    pdf: ""
+    bibtex: "mengistu2024optimal"
+    gs_id: ""
+    citations: 1
+    thumbnail: ""
+
+  - authors: "BS Arega; TM Mengistu"
+    title: "Breast Cancer Stage Identification Using Machine Learning"
+    venue: "Advancement of Science and Technology: AI, Machine Learning"
+    year: 2024
+    doi: ""
+    pdf: ""
+    bibtex: "arega2024breast"
+    gs_id: ""
+    citations: 0
+    thumbnail: ""
+    
+  - authors: "A Birhane; F Shewarega; MA Bitew; M Wagaw; AA Ashetehe"
+    title: "11th EAI International Conference on Advancements of Science and Technology: ICAST 2023"
+    venue: "Springer"
+    year: 2024
+    doi: ""
+    pdf: ""
+    bibtex: "birhane2024icast"
+    gs_id: ""
+    citations: 0
+    thumbnail: ""
+
+
+2023:
+  - authors: "TM Mengistu; BS Arega; BH Belay"
+    title: "Transfer Learning with Pre-trained CNNs for Breast Cancer Stage Identification"
+    venue: "Artificial Intelligence and Digitalization for Sustainable Development, 127"
+    year: 2023
+    doi: ""
+    pdf: ""
+    bibtex: "mengistu2023transfer"
+    gs_id: ""
+    citations: 2
+    thumbnail: ""
+
+  - authors: "BH Woldegiorgis; K Mequanint; MA Bitew; TB Beza; AM Yibre"
+    title: "Artificial Intelligence and Digitalization for Sustainable Development: 10th EAI International Conference, ICAST 2022, Bahir Dar, Ethiopia, November 4-6, 2022, Proceedings"
+    venue: "Springer Nature"
+    year: 2023
+    doi: ""
+    pdf: ""
+    bibtex: "woldegiorgis2023ai"
+    gs_id: ""
+    citations: 1
+    thumbnail: ""
+
+
+2022:
+  - authors: "ML Berihun"
+    title: "Advances of Science and Technology: 9th EAI International Conference, ICAST 2021, Hybrid Event, Bahir Dar, Ethiopia, August 27–29, 2021, Proceedings, Part I"
+    venue: "Springer Nature"
+    year: 2022
+    doi: ""
+    pdf: ""
+    bibtex: "berihun2022advances"
+    gs_id: ""
+    citations: 5
+    thumbnail: ""
+
+  - authors: "TM Mengistu; AB Habtie; FG Mengistu"
+    title: "Design and Development of an Autonomous Smart Stick Framework for Assisting Visually Impaired People"
+    venue: "Advances of Science and Technology, 586"
+    year: 2022
+    doi: ""
+    pdf: ""
+    bibtex: "mengistu2022design"
+    gs_id: ""
+    citations: 2
+    thumbnail: ""
+
+  - authors: "HT Gebremichael; TM Mengistu; MM Beyene; FG Mengistu"
+    title: "OCR System for the Recognition of Ethiopic Real-Life Documents"
+    venue: "Advances of Science and Technology, 559"
+    year: 2022
+    doi: ""
+    pdf: ""
+    bibtex: "gebremichael2022ocr"
+    gs_id: ""
+    citations: 2
+    thumbnail: ""

@@ -15,7 +15,7 @@ layout: default
 <h2>Co-author Network</h2>
 <div id="coauthors"></div>
 
-<!-- ✅ Load libraries ONCE and in correct order -->
+<!-- ✅ Load libraries ONCE -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@2.0.1"></script>
 <script src="https://d3js.org/d3.v7.min.js"></script>
@@ -55,23 +55,25 @@ d3.json('/assets/data/coauthors.json').then(data => {
     .attr("width", 800)
     .attr("height", 500);
 
-  const sim = d3.forceSimulation(data.nodes)
+  const simulation = d3.forceSimulation(data.nodes)
     .force("link", d3.forceLink(data.links).id(d => d.id).distance(120))
     .force("charge", d3.forceManyBody().strength(-250))
     .force("center", d3.forceCenter(400, 250));
 
   const link = svg.selectAll("line")
     .data(data.links)
-    .enter().append("line")
+    .enter()
+    .append("line")
     .attr("stroke", "#bbb");
 
   const node = svg.selectAll("circle")
     .data(data.nodes)
-    .enter().append("circle")
+    .enter()
+    .append("circle")
     .attr("r", 6)
     .attr("fill", "#0077cc");
 
-  sim.on("tick", () => {
+  simulation.on("tick", () => {
     link
       .attr("x1", d => d.source.x)
       .attr("y1", d => d.source.y)
@@ -95,11 +97,7 @@ fetch('/assets/data/coauthor_heatmap.json')
 
     authors.forEach((a, y) => {
       authors.forEach((b, x) => {
-        cells.push({
-          x: x,
-          y: y,
-          v: d.matrix[a]?.[b] || 0
-        });
+        cells.push({ x, y, v: d.matrix[a]?.[b] || 0 });
       });
     });
 
@@ -109,9 +107,9 @@ fetch('/assets/data/coauthor_heatmap.json')
         datasets: [{
           label: 'Co-author Intensity',
           data: cells,
-          backgroundColor: ctx =>
-            ctx.raw.v === 0 ? 'rgba(0,0,0,0)'
-            : `rgba(0,119,204,${0.2 + ctx.raw.v * 0.15})`,
+          backgroundColor: c =>
+            c.raw.v === 0 ? 'rgba(0,0,0,0)'
+            : `rgba(0,119,204,${0.2 + c.raw.v * 0.15})`,
           width: ({ chart }) =>
             chart.chartArea.width / authors.length - 2,
           height: ({ chart }) =>
@@ -120,8 +118,8 @@ fetch('/assets/data/coauthor_heatmap.json')
       },
       options: {
         scales: {
-          x: { type: 'category', labels: authors, grid: { display: false }},
-          y: { type: 'category', labels: authors, grid: { display: false }}
+          x: { type: 'category', labels: authors },
+          y: { type: 'category', labels: authors }
         }
       }
     });

@@ -6,14 +6,18 @@ title: Publication
 # 연구업적
 
 ## Selected Publications (from Google Scholar)
+
 <div class="filters">
   <input id="search" placeholder="Search title…">
   <input id="author" placeholder="Filter author…">
   <select id="year">
     <option value="">All years</option>
-    {% for y in site.data.publications %}
-    <option value="{{ y[0] }}">{{ y[0] }}</option>
-    {% endfor %}
+    {% assign pubs_by_year = site.data.publications | default: empty %}
+    {% if pubs_by_year.size > 0 %}
+      {% for y in pubs_by_year %}
+        <option value="{{ y[0] }}">{{ y[0] }}</option>
+      {% endfor %}
+    {% endif %}
   </select>
 </div>
 
@@ -34,8 +38,8 @@ function filter() {
     p.style.display = ok ? '' : 'none';
   });
 }
-
 </script>
+
 <div class="format-toggle">
   <button onclick="setStyle('apa')">APA</button>
   <button onclick="setStyle('ieee')">IEEE</button>
@@ -44,23 +48,26 @@ function filter() {
 <script>
 function setStyle(style){
   document.querySelectorAll('.pub-item').forEach(p=>{
-    const a=p.dataset.authors, y=p.dataset.year,
-          t=p.dataset.title, v=p.dataset.venue;
+    const a=p.dataset.authors,
+          y=p.dataset.year,
+          t=p.dataset.title,
+          v=p.dataset.venue;
     p.querySelector('.pub-text').innerHTML =
       style==='apa'
-      ? `${a} (${y}). <i>${t}</i>. ${v}.`
-      : `${a}, “${t},” <i>${v}</i>, ${y}.`;
+        ? `${a} (${y}). <i>${t}</i>. ${v}.`
+        : `${a}, “${t},” <i>${v}</i>, ${y}.`;
   });
 }
 document.addEventListener("DOMContentLoaded",()=>setStyle('apa'));
 </script>
 
+{% assign pubs_by_year = site.data.publications | default: empty %}
+{% assign years = pubs_by_year | sort | reverse %}
 
-{% assign years = site.data.publications | sort | reverse %}
-
-{% for year_pair in years %}
-{% assign year = year_pair[0] %}
-{% assign items = year_pair[1] %}
+{% if years.size > 0 %}
+  {% for year_pair in years %}
+    {% assign year = year_pair[0] %}
+    {% assign items = year_pair[1] | default: empty %}
 
 ### {{ year }}
 
@@ -69,12 +76,11 @@ document.addEventListener("DOMContentLoaded",()=>setStyle('apa'));
   <li class="pub-item"
       data-title="{{ p.title }}"
       data-authors="{{ p.authors }}"
-      data-year="{{ year }}">
-      
-    <strong>{{ p.authors }}</strong> ({{ year }}).
-    <em>{{ p.title }}</em>.
-    {{ p.venue }}.
+      data-year="{{ year }}"
+      data-venue="{{ p.venue }}">
     
+    <span class="pub-text"></span>
+
     <span class="pub-links">
       {% if p.pdf %}
         <a href="{{ p.pdf }}" target="_blank">[PDF]</a>
@@ -90,7 +96,10 @@ document.addEventListener("DOMContentLoaded",()=>setStyle('apa'));
   {% endfor %}
 </ol>
 
-{% endfor %}
+  {% endfor %}
+{% else %}
+<p><em>No publications available.</em></p>
+{% endif %}
 
 <p>
 For the full and automatically updated list, visit my

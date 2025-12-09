@@ -49,5 +49,3 @@ For the full and automatically updated list, visit my
 Google Scholar profile
 </a>.
 </p>
-
-For the full and up-to-date list, please visit my [Google Scholar profile](https://scholar.google.com/citations?user=qgSlPxcAAAAJ).

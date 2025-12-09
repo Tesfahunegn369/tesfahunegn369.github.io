@@ -1,0 +1,73 @@
+2025:
+  - title: "Optimizing Federated Learning on Non-IID Data with Cosine Similarity-Driven Client Selection and Retraining"
+    authors: "Mengistu, T. M."
+    venue: "IEEE"
+    year: 2025
+    keywords: ["Federated Learning", "Non-IID Data", "Client Selection", "Cosine Similarity"]
+    doi: ""
+    bibtex: "mengistu2025fl"
+    pdf: ""
+    thumbnail: ""
+
+2024:
+  - title: "A Survey on Heterogeneity Taxonomy, Security and Privacy Preservation in the Integration of IoT, Wireless Sensor Networks and Federated Learning"
+    authors: "Mengistu, T. M.; Kim, T.; Lin, J.-W."
+    venue: "Sensors, Vol. 24, No. 3"
+    year: 2024
+    keywords: ["IoT", "WSN", "Federated Learning", "Security", "Privacy"]
+    doi: ""
+    bibtex: "mengistu2024survey"
+    pdf: ""
+    thumbnail: ""
+
+  - title: "Optimal Model Transfer and Dynamic Parameter Server Selection for Efficient Federated Learning in IoT-Edge Systems with Non-IID Data"
+    authors: "Mengistu, T. M.; Lin, J.-W.; Kuo, P.-H.; Kim, T."
+    venue: "IEEE Access"
+    year: 2024
+    keywords: ["Federated Learning", "IoT-Edge", "Non-IID Data", "Model Transfer"]
+    doi: ""
+    bibtex: "mengistu2024ieeeaccess"
+    pdf: ""
+    thumbnail: ""
+
+  - title: "Breast Cancer Stage Identification Using Machine Learning"
+    authors: "Arega, B. S.; Mengistu, T. M."
+    venue: "Advancement of Science and Technology: AI, Machine Learning"
+    year: 2024
+    keywords: ["Breast Cancer", "Machine Learning", "Medical Imaging"]
+    doi: ""
+    bibtex: "arega2024bcml"
+    pdf: ""
+    thumbnail: ""
+
+2023:
+  - title: "Transfer Learning with Pre-trained CNNs for Breast Cancer Stage Identification"
+    authors: "Mengistu, T. M.; Arega, B. S.; Belay, B. H."
+    venue: "Artificial Intelligence and Digitalization for Sustainable Development, Vol. 127"
+    year: 2023
+    keywords: ["Transfer Learning", "CNN", "Breast Cancer"]
+    doi: ""
+    bibtex: "mengistu2023cnn"
+    pdf: ""
+    thumbnail: ""
+
+2022:
+  - title: "Design and Development of an Autonomous Smart Stick Framework for Assisting Visually Impaired People"
+    authors: "Mengistu, T. M.; Habtie, A. B.; Mengistu, F. G."
+    venue: "Advances of Science and Technology, Vol. 586"
+    year: 2022
+    keywords: ["Assistive Technology", "Smart Stick", "Computer Vision"]
+    doi: ""
+    bibtex: "mengistu2022smartstick"
+    pdf: ""
+    thumbnail: ""
+
+  - title: "OCR System for the Recognition of Ethiopic Real-Life Documents"
+    authors: "Gebremichael, H. T.; Mengistu, T. M.; Beyene, M. M.; Mengistu, F. G."
+    venue: "Advances of Science and Technology, Vol. 559"
+    year: 2022
+    keywords: ["OCR", "Ethiopic Script", "Document Analysis"]
+    doi: ""
+    bibtex: "gebremichael2022ocr"
+    pdf: ""
+    thumbnail: ""

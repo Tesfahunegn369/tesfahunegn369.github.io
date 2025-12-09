@@ -6,6 +6,55 @@ title: Publication
 # 연구업적
 
 ## Selected Publications (from Google Scholar)
+<div class="filters">
+  <input id="search" placeholder="Search title…">
+  <input id="author" placeholder="Filter author…">
+  <select id="year">
+    <option value="">All years</option>
+    {% for y in site.data.publications %}
+    <option value="{{ y[0] }}">{{ y[0] }}</option>
+    {% endfor %}
+  </select>
+</div>
+
+<script>
+document.querySelectorAll('.filters input, .filters select')
+  .forEach(el => el.oninput = filter);
+
+function filter() {
+  const t = search.value.toLowerCase();
+  const a = author.value.toLowerCase();
+  const y = year.value;
+
+  document.querySelectorAll('.pub-item').forEach(p => {
+    const ok =
+      p.dataset.title.toLowerCase().includes(t) &&
+      p.dataset.authors.toLowerCase().includes(a) &&
+      (!y || p.dataset.year === y);
+    p.style.display = ok ? '' : 'none';
+  });
+}
+
+</script>
+<div class="format-toggle">
+  <button onclick="setStyle('apa')">APA</button>
+  <button onclick="setStyle('ieee')">IEEE</button>
+</div>
+
+<script>
+function setStyle(style){
+  document.querySelectorAll('.pub-item').forEach(p=>{
+    const a=p.dataset.authors, y=p.dataset.year,
+          t=p.dataset.title, v=p.dataset.venue;
+    p.querySelector('.pub-text').innerHTML =
+      style==='apa'
+      ? `${a} (${y}). <i>${t}</i>. ${v}.`
+      : `${a}, “${t},” <i>${v}</i>, ${y}.`;
+  });
+}
+document.addEventListener("DOMContentLoaded",()=>setStyle('apa'));
+</script>
+
 
 {% assign years = site.data.publications | sort | reverse %}
 

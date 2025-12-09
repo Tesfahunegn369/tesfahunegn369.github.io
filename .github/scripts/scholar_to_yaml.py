@@ -1,60 +1,88 @@
-from scholarly import scholarly
-import yaml, re
-from collections import defaultdict
+#!/usr/bin/env python3
+# .github/scripts/scholar_to_yaml.py
 
-SCHOLAR_ID = "qgSlPxcAAAAJ"
+from scholarly import scholarly
+import yaml, re, os, sys, time
+
+SCHOLAR_ID = os.environ.get("SCHOLAR_ID", "qgSlPxcAAAAJ")
 YAML_FILE = "_data/publications.yml"
+METRICS_FILE = "_data/gs_metrics.yml"
 
 def load_yaml():
-    try:
-        with open(YAML_FILE, "r") as f:
-            return yaml.safe_load(f) or defaultdict(list)
-    except:
-        return defaultdict(list)
+    if os.path.exists(YAML_FILE):
+        with open(YAML_FILE, "r", encoding="utf-8") as f:
+            return yaml.safe_load(f) or {}
+    return {}
 
-def convert():
+def save_yaml(data):
+    os.makedirs(os.path.dirname(YAML_FILE) or ".", exist_ok=True)
+    with open(YAML_FILE, "w", encoding="utf-8") as f:
+        yaml.dump(data, f, sort_keys=False, allow_unicode=True)
+
+def save_metrics(metrics):
+    os.makedirs(os.path.dirname(METRICS_FILE) or ".", exist_ok=True)
+    with open(METRICS_FILE, "w", encoding="utf-8") as f:
+        yaml.dump(metrics, f, allow_unicode=True)
+
+def author_to_yaml():
     author = scholarly.search_author_id(SCHOLAR_ID)
-    author = scholarly.fill(author, sections=["publications"])
+    author = scholarly.fill(author, sections=["publications", "indices"])
+    pubs = author.get("publications", [])
     yaml_data = load_yaml()
-    
-    for pub in author["publications"]:
-        bib = scholarly.fill(pub)["bib"]
-        title = bib.get("title", "Untitled")
-        author_list = bib.get("author", "")
-        year = int(bib.get("pub_year", 0))
-        venue = bib.get("venue", "Unknown venue")
-        citations = pub.get("num_citations", 0)
-        
-        if year == 0:
+
+    # convert into year->list structure
+    for pub in pubs:
+        try:
+            bib = scholarly.fill(pub)["bib"]
+        except Exception:
             continue
-        
-        # Clean authors
-        authors = "; ".join(a.strip() for a in author_list.split(" and ") if a.strip())
-        
-        new_item = {
-            "authors": authors,
+        title = bib.get("title", "Untitled")
+        authors = bib.get("author", "")
+        year = bib.get("pub_year")
+        venue = bib.get("venue", "") or bib.get("journal", "")
+        citations = bib.get("cites", 0) or 0
+        gs_pub_id = pub.get("author_pub_id", "")
+
+        if not year:
+            continue
+
+        authors_clean = "; ".join(a.strip() for a in authors.split(" and ")) if isinstance(authors, str) else authors
+
+        bibkey = re.sub(r'[^a-zA-Z0-9]', '', (authors_clean.split(";")[0] if authors_clean else "pub").lower()) + str(year)
+
+        item = {
             "title": title,
+            "authors": authors_clean,
             "venue": venue,
-            "year": year,
-            "doi": bib.get("doi", ""),
+            "year": int(year),
+            "keywords": [],
+            "doi": "",
+            "bibtex": bibkey,
             "pdf": "",
-            "bibtex": re.sub(r'[^a-zA-Z0-9]', '', authors.split(';')[0].lower()[:10]) + str(year),
-            "gs_id": pub.get("author_pub_id", ""),
-            "citations": citations
+            "thumbnail": "",
+            "gs_id": gs_pub_id,
+            "citations": int(citations or 0)
         }
-        
-        # Avoid duplicates (simple check by title + year)
-        year_str = str(year)
-        if not any(p.get("title", "") == title for p in yaml_data[year_str]):
-            yaml_data[year_str].append(new_item)
-    
-    # Sort years descending, pubs per year by citations descending
-    for y in yaml_data:
-        yaml_data[y] = sorted(yaml_data[y], key=lambda x: x.get("citations", 0), reverse=True)
+
+        yaml_data.setdefault(str(year), [])
+        # avoid exact duplicates by matching title+authors
+        existing_titles = [p.get("title","").strip().lower() for p in yaml_data[str(year)]]
+        if title.strip().lower() not in existing_titles:
+            yaml_data[str(year)].append(item)
+
+    # sort years descending
     yaml_data = dict(sorted(yaml_data.items(), key=lambda x: int(x[0]), reverse=True))
-    
-    with open(YAML_FILE, "w") as f:
-        yaml.dump(yaml_data, f, sort_keys=False, allow_unicode=True, default_flow_style=False)
+    save_yaml(yaml_data)
+
+    # metrics
+    indices = author.get("indices", {})
+    metrics = {
+        "h_index": indices.get("hindex", 0),
+        "i10_index": indices.get("i10index", 0),
+        "total_citations": author.get("citedby", 0),
+        "cited_by_year": author.get("citedby_year", {})
+    }
+    save_metrics(metrics)
 
 if __name__ == "__main__":
-    convert()
+    author_to_yaml()

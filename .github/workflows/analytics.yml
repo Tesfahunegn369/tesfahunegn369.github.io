@@ -1,0 +1,29 @@
+name: Generate Analytics
+
+on:
+  schedule:
+    - cron: '0 4 * * 0'  # weekly
+  workflow_dispatch:
+
+jobs:
+  analytics:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Install deps
+        run: pip install pyyaml scikit-learn
+      - name: Generate coauthor graph
+        run: python3 .github/scripts/generate_coauthor_graph.py
+      - name: Run advanced analytics
+        run: python3 .github/scripts/advanced_analytics.py
+      - name: Commit results
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add assets/data || true
+          git commit -m "chore: analytics data (coauthors, heatmap, topics, timeline, metrics)" || echo "No changes"
+          git push

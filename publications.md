@@ -20,7 +20,7 @@ title: Publications
 
 {% assign data = site.data.publications %}
 {% if data == empty %}
-  <p>No publications found in <code>_data/publications.yml</code></p>
+  <p>No publications found in <code>assets/data/publications.yml</code></p>
 {% else %}
 
   {% assign all = '' | split: '' %}

@@ -15,7 +15,7 @@ layout: default
 <h2>Co-author Network</h2>
 <div id="coauthors"></div>
 
-<!-- ✅ Load libraries ONCE -->
+<!-- ✅ Load libraries ONCE (correct order) -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@2.0.1"></script>
 <script src="https://d3js.org/d3.v7.min.js"></script>
@@ -47,7 +47,7 @@ fetch('/assets/data/metrics.json')
   });
 
 // =====================
-// Co-author Network
+// Co-author Network (D3)
 // =====================
 d3.json('/assets/data/coauthors.json').then(data => {
   const svg = d3.select("#coauthors")
@@ -108,8 +108,9 @@ fetch('/assets/data/coauthor_heatmap.json')
           label: 'Co-author Intensity',
           data: cells,
           backgroundColor: c =>
-            c.raw.v === 0 ? 'rgba(0,0,0,0)'
-            : `rgba(0,119,204,${0.2 + c.raw.v * 0.15})`,
+            c.raw.v === 0
+              ? 'rgba(0,0,0,0)'
+              : `rgba(0,119,204,${0.2 + c.raw.v * 0.15})`,
           width: ({ chart }) =>
             chart.chartArea.width / authors.length - 2,
           height: ({ chart }) =>
@@ -156,7 +157,9 @@ fetch('/assets/data/impact_timeline.json')
           tension: 0.3
         }]
       },
-      options: { animation: { duration: 2000 } }
+      options: {
+        animation: { duration: 2000 }
+      }
     });
   });
 </script>

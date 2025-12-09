@@ -1,0 +1,27 @@
+name: CrossRef DOI Enrich
+
+on:
+  schedule:
+    - cron: '0 3 * * 0'   # weekly Sunday 03:00 UTC
+  workflow_dispatch:
+
+jobs:
+  enrich:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Install requests, pyyaml
+        run: pip install requests pyyaml
+      - name: Run CrossRef enrichment
+        run: python3 .github/scripts/crossref_enrich.py
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add _data/publications.yml || true
+          git commit -m "chore: enrich DOIs via CrossRef" || echo "No changes"
+          git push

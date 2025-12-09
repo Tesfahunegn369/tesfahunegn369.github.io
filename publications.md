@@ -50,7 +50,7 @@ title: Publications
               data-venue="{{ p.venue | default: '' | escape }}"
               data-citations="{{ p.citations | default: 0 }}"
               style="list-style:none; margin-bottom:18px; line-height:1.7; display:flex; align-items:baseline;">
-            
+
             <span style="font-weight:bold; color:#0066cc; margin-right:8px; flex-shrink:0;">[{{ forloop.index }}]</span>
             <span class="pub-text" style="flex:1;"></span>
             <span style="color:#666; font-size:0.9em; margin-left:12px;" class="pub-cites"></span>
@@ -68,6 +68,7 @@ title: Publications
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+  // Render function to fill text, citations, and update numbering
   function render() {
     document.querySelectorAll('.pub-item').forEach((el, idx) => {
       const a = el.dataset.authors;
@@ -77,10 +78,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const c = el.dataset.citations || '0';
       el.querySelector('.pub-text').innerHTML = `<strong>${a}</strong> (${y}). <em>${t}</em>. ${v}.`;
       el.querySelector('.pub-cites').textContent = `(${c} citation${c !== '1' ? 's' : ''})`;
-      el.querySelector('span').textContent = `[${idx + 1}]`;   // update number
+      el.querySelector('span:first-child').textContent = `[${idx + 1}]`;  // Update numbering dynamically
     });
   }
 
+  // APA / IEEE toggle
   window.setStyle = function(style) {
     document.querySelectorAll('.pub-item').forEach(el => {
       const a = el.dataset.authors;
@@ -95,6 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('btn-' + style).classList.add('active');
   };
 
+  // Search & filter
   function filter() {
     const sq = document.getElementById('search').value.toLowerCase();
     const aq = document.getElementById('author').value.toLowerCase();
@@ -107,11 +110,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Debounce for responsive search
   const debounce = (fn, d) => { let t; return () => { clearTimeout(t); t = setTimeout(fn, d); }; };
+
+  // Attach events
   document.getElementById('search').oninput = debounce(filter, 250);
   document.getElementById('author').oninput = debounce(filter, 250);
   document.getElementById('year').onchange = filter;
 
+  // Run everything
   render();
   setStyle('apa');
   filter();
@@ -119,76 +126,9 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <hr style="margin:80px 0; border-top:1px solid #eee;">
+
 <p style="text-align:center; color:#555;">
   Automatically synced from 
   <a href="https://orcid.org/0000-0001-9385-1768" target="_blank">ORCID</a> • 
   <a href="https://scholar.google.com/citations?user=qgSlPxcAAAAJ" target="_blank">Google Scholar</a>
 </p>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  // Fill publication text + citation count
-  function render() {
-    document.querySelectorAll('.pub-item').forEach(el => {
-      const a = el.dataset.authors;
-      const y = el.dataset.year;
-      const t = el.dataset.title;
-      const v = el.dataset.venue;
-      const c = el.dataset.citations || '0';
-
-      // APA style (default)
-      el.querySelector('.pub-text').innerHTML = 
-        `<strong>${a}</strong> (${y}). <em>${t}</em>. ${v}.`;
-
-      // Show citations (you already have this, but keep it)
-      const citeSpan = el.querySelector('.pub-cites') || el.querySelector('.cites');
-      if (citeSpan) citeSpan.textContent = `(${c} citation${c !== '1' ? 's' : ''})`;
-    });
-  }
-
-  // APA / IEEE toggle
-  window.setStyle = function(style) {
-    document.querySelectorAll('.pub-item').forEach(el => {
-      const a = el.dataset.authors;
-      const y = el.dataset.year;
-      const t = el.dataset.title;
-      const v = el.dataset.venue;
-
-      el.querySelector('.pub-text').innerHTML = style === 'apa'
-        ? `<strong>${a}</strong> (${y}). <em>${t}</em>. ${v}.`
-        : `<strong>${a}</strong>, “${t},” <em>${v}</em>, ${y}.`;
-    });
-
-    document.querySelectorAll('.style-toggle button').forEach(b => b.classList.remove('active'));
-    document.getElementById('btn-' + style).classList.add('active');
-  };
-
-  // Search + filter (debounced)
-  function filter() {
-    const sq = document.getElementById('search').value.toLowerCase();
-    const aq = document.getElementById('author').value.toLowerCase();
-    const yq = document.getElementById('year').value;
-
-    document.querySelectorAll('.pub-item').forEach(el => {
-      const ok = el.dataset.title.toLowerCase().includes(sq) &&
-                 el.dataset.authors.toLowerCase().includes(aq) &&
-                 (!yq || el.dataset.year === yq);
-      el.style.display = ok ? '' : 'none';
-    });
-  }
-
-  // Debounce helper
-  const debounce = (fn, delay) => {
-    let t; return () => { clearTimeout(t); t = setTimeout(fn, delay); };
-  };
-
-  // Attach events
-  document.getElementById('search').oninput = debounce(filter, 250);
-  document.getElementById('author').oninput = debounce(filter, 250);
-  document.getElementById('year').onchange = filter;
-
-  // FIRST render + show everything
-  render();
-  setStyle('apa');
-  filter();
-});
-</script>

@@ -2,17 +2,52 @@
 layout: default
 title: Publication
 ---
+
 # 연구업적
 
 ## Selected Publications (from Google Scholar)
 
-- **Mengistu, T. M.** (2025) *Optimizing Federated Learning on Non-IID Data with Cosine Similarity-Driven Client Selection and Retraining*. IEEE, 2025.
-- **Mengistu, T. M.**, Kim, T., Lin, J.-W. (2024). *A Survey on Heterogeneity Taxonomy, Security and Privacy Preservation in the Integration of IoT, Wireless Sensor Networks and Federated Learning*. Sensors, 24(3), 2024.
-- **Mengistu, T. M.**, Lin, J.-W., Kuo, P.-H., Kim, T. (2024). *Optimal Model Transfer and Dynamic Parameter Server Selection for Efficient Federated Learning in IoT-Edge Systems with Non-IID Data.* IEEE Access, 2024.
-- **Mengistu, T. M.**, Arega, B. S., Belay, B. H. (2023). *Transfer Learning with Pre-trained CNNs for Breast Cancer Stage Identification.* Artificial Intelligence and Digitalization for Sustainable Development, 127, 2023.
-- **Mengistu, T. M.**, Habtie, A. B., Mengistu, F. G. (2022). *Design and Development of an Autonomous Smart Stick Framework for Assisting Visually Impaired People.* Advances of Science and Technology, 586, 2022.
-- Arega, B. S., **Mengistu, T. M.** (2024). *Breast Cancer Stage Identification Using Machine Learning.* Advancement of Science and Technology: AI, Machine Learning, 2024.
-- Gebremichael, H. T., **Mengistu, T. M.**, Beyene, M. M., Mengistu, F. G. (2022). *OCR System for the Recognition of Ethiopic Real-Life Documents.* Advances of Science and Technology, 559, 2022.
+{% assign years = site.data.publications | sort | reverse %}
 
+{% for year_pair in years %}
+{% assign year = year_pair[0] %}
+{% assign items = year_pair[1] %}
+
+### {{ year }}
+
+<ol class="pub-list">
+  {% for p in items %}
+  <li class="pub-item"
+      data-title="{{ p.title }}"
+      data-authors="{{ p.authors }}"
+      data-year="{{ year }}">
+      
+    <strong>{{ p.authors }}</strong> ({{ year }}).
+    <em>{{ p.title }}</em>.
+    {{ p.venue }}.
+    
+    <span class="pub-links">
+      {% if p.pdf %}
+        <a href="{{ p.pdf }}" target="_blank">[PDF]</a>
+      {% endif %}
+      {% if p.doi %}
+        <a href="{{ p.doi }}" target="_blank">[DOI]</a>
+      {% endif %}
+      {% if p.bibtex %}
+        <a href="/bibtex/{{ p.bibtex }}.bib" download>[BibTeX]</a>
+      {% endif %}
+    </span>
+  </li>
+  {% endfor %}
+</ol>
+
+{% endfor %}
+
+<p>
+For the full and automatically updated list, visit my
+<a href="https://scholar.google.com/citations?user=qgSlPxcAAAAJ" target="_blank">
+Google Scholar profile
+</a>.
+</p>
 
 For the full and up-to-date list, please visit my [Google Scholar profile](https://scholar.google.com/citations?user=qgSlPxcAAAAJ).

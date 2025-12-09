@@ -20,7 +20,7 @@ title: Publications
 
 {% assign data = site.data.publications %}
 {% if data == empty %}
-  <p>No publications found in <code>assets/data/publications.yml</code></p>
+  <p>No publications found in <code>_data/publications.yml</code></p>
 {% else %}
 
   {% assign all = '' | split: '' %}
@@ -49,9 +49,14 @@ title: Publications
               data-title="{{ p.title | default: '' | escape }}"
               data-authors="{{ p.authors | default: '' | escape }}"
               data-year="{{ p.year }}"
-              data-venue="{{ p.venue | default: '' | escape }}">
+              data-venue="{{ p.venue | default: '' | escape }}"
+              data-citations="{{ p.citations | default: 0 }}">
 
             <span class="pub-text"></span>
+
+            <span class="pub-cites" style="color: #666; font-size: 0.9em; margin-left: 10px;">
+              ({{ p.citations | default: 0 }} citations)
+            </span>
 
             <span class="pub-links">
               {% if p.pdf %}<a href="{{ p.pdf | relative_url }}" target="_blank">[PDF]</a>{% endif %}
@@ -168,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
 <p style="text-align:center; font-size:1.1em; color:#555;">
   Automatically synced from 
   <a href="https://orcid.org/0000-0001-9385-1768" target="_blank">
-    <img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" alt="ORCID" style="vertical-align:middle;"> ORCID Profile
+    <img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" alt="ORCID" style="vertical-align:middle;"> ORCID
   </a>
   &nbsp;•&nbsp;
   <a href="https://scholar.google.com/citations?user=qgSlPxcAAAAJ" target="_blank">Google Scholar</a>

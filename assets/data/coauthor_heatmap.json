@@ -1,0 +1,70 @@
+{
+  "authors": [
+    "Mengistu, T. M.",
+    "Kim, T.",
+    "Lin, J.-W.",
+    "Kuo, P.-H.",
+    "Arega, B. S.",
+    "Belay, B. H.",
+    "Habtie, A. B.",
+    "Mengistu, F. G.",
+    "Gebremichael, H. T.",
+    "Beyene, M. M."
+  ],
+  "matrix": {
+    "Mengistu, T. M.": {
+      "Kim, T.": 2,
+      "Lin, J.-W.": 2,
+      "Kuo, P.-H.": 1,
+      "Arega, B. S.": 2,
+      "Belay, B. H.": 1,
+      "Habtie, A. B.": 1,
+      "Mengistu, F. G.": 2,
+      "Gebremichael, H. T.": 1,
+      "Beyene, M. M.": 1
+    },
+    "Kim, T.": {
+      "Mengistu, T. M.": 2,
+      "Lin, J.-W.": 2,
+      "Kuo, P.-H.": 1
+    },
+    "Lin, J.-W.": {
+      "Mengistu, T. M.": 2,
+      "Kim, T.": 2,
+      "Kuo, P.-H.": 1
+    },
+    "Kuo, P.-H.": {
+      "Mengistu, T. M.": 1,
+      "Lin, J.-W.": 1,
+      "Kim, T.": 1
+    },
+    "Arega, B. S.": {
+      "Mengistu, T. M.": 2,
+      "Belay, B. H.": 1
+    },
+    "Belay, B. H.": {
+      "Mengistu, T. M.": 1,
+      "Arega, B. S.": 1
+    },
+    "Habtie, A. B.": {
+      "Mengistu, T. M.": 1,
+      "Mengistu, F. G.": 1
+    },
+    "Mengistu, F. G.": {
+      "Mengistu, T. M.": 2,
+      "Habtie, A. B.": 1,
+      "Gebremichael, H. T.": 1,
+      "Beyene, M. M.": 1
+    },
+    "Gebremichael, H. T.": {
+      "Mengistu, T. M.": 1,
+      "Beyene, M. M.": 1,
+      "Mengistu, F. G.": 1
+    },
+    "Beyene, M. M.": {
+      "Gebremichael, H. T.": 1,
+      "Mengistu, T. M.": 1,
+      "Mengistu, F. G.": 1
+    }
+  }
+}

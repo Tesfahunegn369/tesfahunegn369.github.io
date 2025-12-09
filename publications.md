@@ -5,76 +5,63 @@ title: Publications
 
 # Publications
 
-<div class="filters" style="margin: 2rem 0; text-align: center;">
-  <input type="text" id="search" placeholder="Search title…" style="padding: 10px; width: 220px; margin: 5px;">
-  <input type="text" id="author" placeholder="Filter by author…" style="padding: 220px; padding: 10px; margin: 5px;">
-  <select id="year" style="padding: 10px; margin: 5px;">
+<div style="margin:30px 0; text-align:center;">
+  <input type="text" id="search" placeholder="Search title…" style="padding:10px; width:250px; margin:5px;">
+  <input type="text" id="author" placeholder="Filter by author…" style="padding:10px; width:250px; margin:5px;">
+  <select id="year" style="padding:10px; margin:5px;">
     <option value="">All years</option>
   </select>
 </div>
 
-<div class="format-toggle" style="text-align: center; margin-bottom: 30px;">
-  <button onclick="setStyle('apa')" class="btn-active">APA</button>
-  <button onclick="setStyle('ieee')">IEEE</button>
+<div style="text-align:center; margin-bottom:40px;">
+  <button onclick="setStyle('apa')" id="btn-apa" class="style-btn active">APA</button>
+  <button onclick="setStyle('ieee')" id="btn-ieee" class="style-btn">IEEE</button>
 </div>
 
-{% comment %}
-  Your data structure:
-  site.data.publications = {
-    "2025": [ {title:..., authors:...}, ... ],
-    "2024": [ ... ],
-    ...
-  }
-{% endcomment %}
+{% assign pubs_data = site.data.publications %}
 
-{% assign data = site.data.publications %}
-
-{% if data == empty %}
-  <p><em>No publications data found in <code>_data/publications.yml</code></em></p>
+{% if pubs_data == empty %}
+  <p>No publications found in <code>_data/publications.yml</code></p>
 {% else %}
 
-  {% comment %}Collect all publications into one flat array with year attached{% endcomment %}
   {% assign all_pubs = '' | split: '' %}
 
-  {% for year_pair in data %}
-    {% assign year = year_pair[0] %}
-    {% assign pubs_of_year = year_pair[1] %}
-    {% for p in pubs_of_year %}
-      {% assign pub_with_year = p | merge: hash_year: year %}
-      {% assign all_pubs = all_pubs | push: pub_with_year %}
+  {% for year_entry in pubs_data %}
+    {% assign year = year_entry[0] %}
+    {% assign papers = year_entry[1] %}
+    {% for p in papers %}
+      {% assign pub = p | merge: { "year": year } %}
+      {% assign pub = pub | merge: { "display_year": year } %}
+      {% assign all_pubs = all_pubs | push: pub %}
     {% endfor %}
   {% endfor %}
 
-  {% comment %}Sort by year descending{% endcomment %}
-  {% assign sorted_pubs = all_pubs | sort: 'year' | reverse %}
+  {% assign sorted = all_pubs | sort: 'display_year' | reverse %}
+  {% assign years = sorted | map: 'display_year' | uniq | sort | reverse %}
 
-  {% comment %}Unique years for headings & dropdown{% endcomment %}
-  {% assign years = sorted_pubs | map: 'year' | uniq | sort | reverse %}
-
-  {% comment %}Populate year dropdown{% endcomment %}
   <script>
     const years = {{ years | jsonify }};
-    const select = document.getElementById('year');
-    years.forEach(y => select.add(new Option(y, y)));
+    const sel = document.getElementById('year');
+    years.forEach(y => sel.add(new Option(y, y)));
   </script>
 
-  {% for year in years %}
-    <h3 style="margin-top: 3rem; border-bottom:1px solid #eee; padding-bottom:8px;">
-      {{ year }}
+  {% for y in years %}
+    <h3 style="margin-top:50px; border-bottom:2px solid #0077cc; padding-bottom:8px; color:#222;">
+      {{ y }}
     </h3>
 
-    <ol class="pub-list" style="padding-left:1.6rem; line-height:1.7;">
-      {% for p in sorted_pubs %}
-        {% if p.year == year or p.hash_year == year %}
+    <ol style="padding-left:2rem; line-height:1.8;">
+      {% for p in sorted %}
+        {% if p.display_year == y %}
           <li class="pub-item"
               data-title="{{ p.title | default: '' | escape }}"
-              data-authors="{{ p.authors | default: 'Unknown' | escape }}"
-              data-year="{{ p.year | default: p.hash_year }}"
+              data-authors="{{ p.authors | default: '' | escape }}"
+              data-year="{{ p.display_year }}"
               data-venue="{{ p.venue | default: '' | escape }}">
 
-            <span class="pub-text"></span>
+            <strong class="pub-text"></strong>
 
-            <span class="pub-links" style="margin-left:20px; font-size:0.9em; color:#555;">
+            <span class="links" style="margin-left:25px; font-size:0.95em;">
               {% if p.pdf and p.pdf != '' %}
                 <a href="{{ p.pdf | relative_url }}" target="_blank">[PDF]</a>
               {% endif %}
@@ -98,71 +85,76 @@ title: Publications
 {% endif %}
 
 <script>
-function filter() {
-  const term = document.getElementById('search').value.toLowerCase();
-  const auth = document.getElementById('author').value.toLowerCase();
-  const year = document.getElementById('year').value;
-
-  document.querySelectorAll('.pub-item').forEach(item => {
-    const t = item.dataset.title.toLowerCase();
-    const a = item.dataset.authors.toLowerCase();
-    const y = item.dataset.year;
-
-    const ok = t.includes(term) && a.includes(auth) && (!year || y === year);
-    item.style.display = ok ? '' : 'none';
-  });
-}
-
+// APA / IEEE toggle
 function setStyle(style) {
-  document.querySelectorAll('.pub-item').forEach(item => {
-    const a = item.dataset.authors;
-    const y = item.dataset.year;
-    const t = item.dataset.title;
-    const v = item.dataset.venue || '';
+  document.querySelectorAll('.pub-item').forEach(el => {
+    const a = el.dataset.authors;
+    const y = el.dataset.year;
+    const t = el.dataset.title;
+    const v = el.dataset.venue;
 
     const text = style === 'apa'
       ? `${a} (${y}). <i>${t}</i>. ${v}.`
       : `${a}, "${t}," <i>${v}</i>, ${y}.`;
 
-    item.querySelector('.pub-text').innerHTML = text;
+    el.querySelector('.pub-text').innerHTML = text;
   });
 
-  document.querySelectorAll('.format-toggle button')
-          .forEach(b => b.classList.toggle('btn-active', b.onclick.toString().includes(`'${style}'`)));
+  document.getElementById('btn-apa').classList.toggle('active', style==='apa');
+  document.getElementById('btn-ieee').classList.toggle('active', style==='ieee');
+}
+
+// Search + filters
+function applyFilters() {
+  const s = document.getElementById('search').value.toLowerCase();
+  const a = document.getElementById('author').value.toLowerCase();
+  const y = document.getElementById('year').value;
+
+  document.querySelectorAll('.pub-item').forEach(el => {
+    const title   = el.dataset.title.toLowerCase();
+    const authors = el.dataset.authors.toLowerCase();
+    const year    = el.dataset.year;
+
+    const ok = title.includes(s) && authors.includes(a) && (!y || year === y);
+    el.style.display = ok ? '' : 'none';
+  });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('search').addEventListener('input', filter);
-  document.getElementById('author').addEventListener('input', filter);
-  document.getElementById('year').addEventListener('change', filter);
+  document.getElementById('search').addEventListener('input', applyFilters);
+  document.getElementById('author').addEventListener('input', applyFilters);
+  document.getElementById('year').addEventListener('change', applyFilters);
 
-  setStyle('apa');   // default style
+  setStyle('apa');     // default
+  applyFilters();      // show all initially
 });
 </script>
 
 <style>
-.format-toggle button {
-  padding: 8px 16px;
-  margin: 0 5px;
-  border: 1px solid #0077cc;
-  background: #fff;
+.style-btn {
+  padding: 10px 20px;
+  margin: 0 8px;
+  border: 2px solid #0077cc;
+  background: white;
   color: #0077cc;
-  border-radius: 4px;
+  font-weight: bold;
+  border-radius: 6px;
   cursor: pointer;
 }
-.format-toggle button.btn-active {
+.style-btn.active {
   background: #0077cc;
   color: white;
 }
-.pub-links a { margin-right: 12px; color: #0066aa; text-decoration: none; }
-.pub-links a:hover { text-decoration: underline; }
+.links a {
+  { margin:0 10px; color:#0061a8; text-decoration:none; }
+.links a:hover { text-decoration:underline; }
 </style>
 
-<hr style="margin:4rem 0">
+<hr style="margin:60px 0">
 
-<p style="text-align:center; font-size:1.1em;">
-  Full & always up-to-date list → 
-  <a href="https://scholar.google.com/citations?user=qgSlPxcAAAAJ" target="_blank" style="font-weight:bold;">
+<p style="text-align:center; font-size:1.2em;">
+  Complete & always up-to-date list → 
+  <a href="https://scholar.google.com/citations?user=qgSlPxcAAAAJ" target="_blank">
     Google Scholar Profile
   </a>
 </p>

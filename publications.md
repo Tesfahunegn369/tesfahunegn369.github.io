@@ -5,36 +5,105 @@ title: Publications
 
 # Publications
 
-## Selected Publications (from Google Scholar)
+## Selected Publications
 
-<div class="filters" style="margin: 20px 0; text-align: center;">
-  <input id="search" placeholder="Search title…" style="width:200px; padding:8px; margin:5px;">
-  <input id="author" placeholder="Filter author…" style="width:200px; padding:8px; margin:5px;">
-  <select id="year" style="padding:8px; margin:5px;">
+<div class="filters" style="margin: 2rem 0; text-align: center;">
+  <input type="text" id="search" placeholder="Search title…" style="padding: 10px; width: 220px; margin: 5px;">
+  <input type="text" id="author" placeholder="Filter by author…" style="padding: 10px; width: 220px; margin: 5px;">
+  <select id="year" style="padding: 10px; margin: 5px;">
     <option value="">All years</option>
   </select>
 </div>
 
-<div class="format-toggle" style="margin-bottom: 20px; text-align: center;">
-  <button onclick="setStyle('apa')" class="active">APA</button>
+<div class="format-toggle" style="text-align: center; margin-bottom: 30px;">
+  <button onclick="setStyle('apa')" class="btn-active">APA</button>
   <button onclick="setStyle('ieee')">IEEE</button>
 </div>
 
+{% comment %}
+  Safely load publications – works whether _data/publications.yml exists or not
+{% endcomment %}
+{% assign raw_pubs = site.data.publications | default: false %}
+
+{% if raw_pubs == false or raw_pubs == empty %}
+  <p><em>No publications data found. Please check <code>_data/publications.yml</code> or <code>_data/publications.json</code>.</em></p>
+{% else %}
+
+  {% comment %} Ensure it's an array and has items {% endcomment %}
+  {% assign pubs = raw_pubs | where_exp: "item", "item.year != nil" %}
+
+  {% if pubs.size == 0 %}
+    <p><em>No valid publications found (missing 'year' field?).</em></p>
+  {% else %}
+
+    {% comment %} Sort by year descending {% endcomment %}
+    {% assign sorted_pubs = pubs | sort: "year" | reverse %}
+
+    {% comment %} Extract unique years for headings and dropdown {% endcomment %}
+    {% assign all_years = sorted_pubs | map: "year" | uniq | sort: "year" | reverse %}
+
+    {% comment %} Populate year dropdown via JavaScript (safe) {% endcomment %}
+    <script>
+      const years = {{ all_years | jsonify }};
+      const select = document.getElementById('year');
+      years.forEach(y => {
+        const opt = new Option(y, y);
+        select.appendChild(opt);
+      });
+    </script>
+
+    {% for year in all_years %}
+      <h3 style="margin-top: 2.5rem; border-bottom: 1px solid #ddd; padding-bottom: 8px;">{{ year }}</h3>
+      <ol class="pub-list" style="padding-left: 1.5rem;">
+        {% for p in sorted_pubs %}
+          {% if p.year == year %}
+            <li class="pub-item"
+                data-title="{{ p.title | default: '' | escape }}"
+                data-authors="{{ p.authors | default: 'Unknown' | escape }}"
+                data-year="{{ p.year }}"
+                data-venue="{{ p.venue | default: '' | escape }}">
+
+              <span class="pub-text"></span>
+
+              <span class="pub-links" style="margin-left: 20px; font-size: 0.9em; color: #555;">
+                {% if p.pdf %}
+                  <a href="{{ p.pdf | relative_url }}" target="_blank">[PDF]</a>
+                {% endif %}
+                {% if p.doi %}
+                  <a href="https://doi.org/{{ p.doi }}" target="_blank">[DOI]</a>
+                {% elsif p.doi contains 'http %}
+                  <a href="{{ p.doi }}" target="_blank">[DOI]</a>
+                {% endif %}
+                {% if p.bibtex %}
+                  <a href="/bibtex/{{ p.bibtex }}.bib" download>[BibTeX]</a>
+                {% endif %}
+              </span>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ol>
+    {% endfor %}
+
+  {% endif %}
+{% endif %}
+
 <script>
+// Filter logic
 function filter() {
   const term = document.getElementById('search').value.toLowerCase();
   const auth = document.getElementById('author').value.toLowerCase();
   const year = document.getElementById('year').value;
 
   document.querySelectorAll('.pub-item').forEach(item => {
-    const matchesTitle  = item.dataset.title.toLowerCase().includes(term);
-    const matchesAuthor = item.dataset.authors.toLowerCase().includes(auth);
-    const matchesYear   = !year || item.dataset.year === year;
+    const matchTitle  = item.dataset.title.toLowerCase().includes(term);
+    const matchAuthor = item.dataset.authors.toLowerCase().includes(auth);
+    const matchYear   = !year || item.dataset.year === year;
 
-    item.style.display = (matchesTitle && matchesAuthor && matchesYear) ? '' : 'none';
+    item.style.display = (matchTitle && matchAuthor && matchYear) ? '' : 'none';
   });
 }
 
+// Format toggle (APA / IEEE)
 function setStyle(style) {
   document.querySelectorAll('.pub-item').forEach(item => {
     const a = item.dataset.authors;
@@ -49,82 +118,55 @@ function setStyle(style) {
     item.querySelector('.pub-text').innerHTML = text;
   });
 
-  // update active button style
-  document.querySelectorAll('.format-toggle button').forEach(b => b.classList.remove('active'));
-  event.target.classList.add('active');
+  // Update active button
+  document.querySelectorAll('.format-toggle button').forEach(b => b.classList.remove('btn-active'));
+  event.currentTarget.classList.add('btn-active');
 }
 
-// run on load
-document.addEventListener
+// Initialize
 document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.filters input, .filters select')
-          .forEach(el => el.addEventListener('input', filter));
+  // Attach filter events
+  ['search', 'author', 'year'].forEach(id => {
+    document.getElementById(id).addEventListener('input', filter);
+  });
+
+  // Default to APA
   setStyle('apa');
+
+  // Initial filter (in case URL has params or something)
+  filter();
 });
 </script>
 
-{% assign raw_pubs = site.data.publications | default: empty_array %}
+<style>
+.format-toggle button {
+  padding: 8px 16px;
+  margin: 0 5px;
+  border: 1px solid #0077cc;
+  background: white;
+  color: #0077cc;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.format-toggle button.btn-active {
+  background: #0077cc;
+  color: white;
+}
+.pub-links a {
+  margin-right: 12px;
+  text-decoration: none;
+  color: #0066aa;
+}
+.pub-links a:hover {
+  text-decoration: underline;
+}
+</style>
 
-{% if raw_pubs == empty %}
-  <p><em>No publications data found (check <code>_data/publications.yml</code> or <code>.json</code>).</em></p>
-{% else %}
+<hr style="margin: 4rem 0;">
 
-  {% comment %}
-    raw_pubs is expected to be an array of hashes with at least:
-      title, authors, year, venue, (pdf, doi, bibtex optional)
-  {% endcomment %}
-
-  {% assign pubs = raw_pubs | sort: "year" | reverse %}
-
-  {% comment %}Populate the year dropdown{% endcomment %}
-  <script>
-    const years = [...new Set([{% for p in pubs %}"{{ p.year }}",{% endfor %}])].sort().reverse();
-    const select = document.getElementById('year');
-    years.forEach(y => {
-      const opt = document.createElement('option');
-      opt.value = y;
-      opt.textContent = y;
-      select.appendChild(opt);
-    });
-  </script>
-
-  {% assign years_group = pubs | map: "year" | uniq | sort | reverse %}
-
-  {% for year in years_group %}
-    <h3>{{ year }}</h3>
-    <ol class="pub-list">
-      {% for p in pubs %}
-        {% if p.year == year %}
-          <li class="pub-item"
-              data-title="{{ p.title | escape }}"
-              data-authors="{{ p.authors | escape }}"
-              data-year="{{ p.year }}"
-              data-venue="{{ p.venue | escape }}">
-
-            <span class="pub-text"></span>
-
-            <span class="pub-links" style="margin-left: 15px; font-size:0.9em;">
-              {% if p.pdf %}
-                <a href="{{ p.pdf }}" target="_blank">[PDF]</a>
-              {% endif %}
-              {% if p.doi %}
-                <a href="{{ p.doi }}" target="_blank">[DOI]</a>
-              {% endif %}
-              {% if p.bibtex %}
-                <a href="/bibtex/{{ p.bibtex }}.bib" download>[BibTeX]</a>
-              {% endif %}
-            </span>
-          </li>
-        {% endif %}
-      {% endfor %}
-    </ol>
-  {% endfor %}
-
-{% endif %}
-
-<p style="margin-top: 40px;">
-  For the full and always up-to-date list, visit my
-  <a href="https://scholar.google.com/citations?user=qgSlPxcAAAAJ" target="_blank">
-    Google Scholar profile
-  </a>.
+<p style="text-align: center; font-size: 1.1em;">
+  For the complete and always up-to-date list, visit my<br>
+  <a href="https://scholar.google.com/citations?user=qgSlPxcAAAAJ" target="_blank" style="font-weight: bold;">
+    Google Scholar Profile
+  </a>
 </p>

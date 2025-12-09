@@ -5,23 +5,26 @@ layout: default
 
 ## Publication Metrics
 
-<div id="metrics">Loading…</div>
+<div id="metrics">Loading...</div>
 
+<canvas id="citationChart" style="max-width:900px"></canvas>
 <canvas id="heatmap" width="800" height="400"></canvas>
 <canvas id="topics" width="600" height="400"></canvas>
 <canvas id="impact" width="800" height="400"></canvas>
 
-<canvas id="citationChart" style="max-width:900px"></canvas>
-
 <h2>Co-author Network</h2>
 <div id="coauthors"></div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- ✅ Load libraries ONCE and in correct order -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@2.0.1"></script>
 <script src="https://d3js.org/d3.v7.min.js"></script>
 
+{% raw %}
 <script>
-
-// Metrics + citation graph
+// =====================
+// Metrics + Citations
+// =====================
 fetch('/assets/data/metrics.json')
   .then(r => r.json())
   .then(d => {
@@ -37,14 +40,15 @@ fetch('/assets/data/metrics.json')
         datasets: [{
           label: 'Citations per year',
           data: Object.values(d.cited_by_year),
-          fill: false,
           borderWidth: 2
         }]
       }
     });
   });
 
-// Co-author network
+// =====================
+// Co-author Network
+// =====================
 d3.json('/assets/data/coauthors.json').then(data => {
   const svg = d3.select("#coauthors")
     .append("svg")
@@ -52,88 +56,110 @@ d3.json('/assets/data/coauthors.json').then(data => {
     .attr("height", 500);
 
   const sim = d3.forceSimulation(data.nodes)
-    .force("link", d3.forceLink(data.links).id(d=>d.id).distance(120))
+    .force("link", d3.forceLink(data.links).id(d => d.id).distance(120))
     .force("charge", d3.forceManyBody().strength(-250))
-    .force("center", d3.forceCenter(400,250));
+    .force("center", d3.forceCenter(400, 250));
 
   const link = svg.selectAll("line")
     .data(data.links)
     .enter().append("line")
-    .attr("stroke","#bbb");
+    .attr("stroke", "#bbb");
 
   const node = svg.selectAll("circle")
     .data(data.nodes)
     .enter().append("circle")
-    .attr("r",6)
-    .attr("fill","#0077cc");
+    .attr("r", 6)
+    .attr("fill", "#0077cc");
 
-  sim.on("tick",()=>{
-    link.attr("x1",d=>d.source.x)
-        .attr("y1",d=>d.source.y)
-        .attr("x2",d=>d.target.x)
-        .attr("y2",d=>d.target.y);
-    node.attr("cx",d=>d.x)
-        .attr("cy",d=>d.y);
+  sim.on("tick", () => {
+    link
+      .attr("x1", d => d.source.x)
+      .attr("y1", d => d.source.y)
+      .attr("x2", d => d.target.x)
+      .attr("y2", d => d.target.y);
+
+    node
+      .attr("cx", d => d.x)
+      .attr("cy", d => d.y);
   });
 });
-</script>
 
+// =====================
+// Co-author Heatmap
+// =====================
+fetch('/assets/data/coauthor_heatmap.json')
+  .then(r => r.json())
+  .then(d => {
+    const authors = d.authors;
+    const cells = [];
 
-<script>
-// ------------------
-// Heatmap
-// ------------------
-fetch('/assets/data/coauthor_heatmap.json').then(r=>r.json()).then(d=>{
-  const ctx=document.getElementById('heatmap').getContext('2d');
-  const authors=d.authors;
-  const values=[];
-  authors.forEach(a=>{
-    authors.forEach(b=>{
-      values.push(d.matrix[a]?.[b]||0);
+    authors.forEach((a, y) => {
+      authors.forEach((b, x) => {
+        cells.push({
+          x: x,
+          y: y,
+          v: d.matrix[a]?.[b] || 0
+        });
+      });
+    });
+
+    new Chart(document.getElementById('heatmap'), {
+      type: 'matrix',
+      data: {
+        datasets: [{
+          label: 'Co-author Intensity',
+          data: cells,
+          backgroundColor: ctx =>
+            ctx.raw.v === 0 ? 'rgba(0,0,0,0)'
+            : `rgba(0,119,204,${0.2 + ctx.raw.v * 0.15})`,
+          width: ({ chart }) =>
+            chart.chartArea.width / authors.length - 2,
+          height: ({ chart }) =>
+            chart.chartArea.height / authors.length - 2
+        }]
+      },
+      options: {
+        scales: {
+          x: { type: 'category', labels: authors, grid: { display: false }},
+          y: { type: 'category', labels: authors, grid: { display: false }}
+        }
+      }
     });
   });
 
-  new Chart(ctx,{
-    type:'matrix',
-    data:{datasets:[{
-      label:'Co-author Intensity',
-      data:values.map((v,i)=>({
-        x:i%authors.length,
-        y:Math.floor(i/authors.length),
-        v:v
-      })),
-    }]}
+// =====================
+// Topic Clusters
+// =====================
+fetch('/assets/data/topic_clusters.json')
+  .then(r => r.json())
+  .then(d => {
+    new Chart(document.getElementById('topics'), {
+      type: 'pie',
+      data: {
+        labels: Object.keys(d),
+        datasets: [{ data: Object.values(d) }]
+      }
+    });
   });
-});
 
-// ------------------
-// Topics
-// ------------------
-fetch('/assets/data/topic_clusters.json').then(r=>r.json()).then(d=>{
-  new Chart(document.getElementById('topics'),{
-    type:'pie',
-    data:{
-      labels:Object.keys(d),
-      datasets:[{data:Object.values(d)}]
-    }
+// =====================
+// Impact Timeline
+// =====================
+fetch('/assets/data/impact_timeline.json')
+  .then(r => r.json())
+  .then(d => {
+    new Chart(document.getElementById('impact'), {
+      type: 'line',
+      data: {
+        labels: Object.keys(d),
+        datasets: [{
+          label: 'Publications per year',
+          data: Object.values(d),
+          tension: 0.3
+        }]
+      },
+      options: { animation: { duration: 2000 } }
+    });
   });
-});
-
-// ------------------
-// Impact timeline
-// ------------------
-fetch('/assets/data/impact_timeline.json').then(r=>r.json()).then(d=>{
-  new Chart(document.getElementById('impact'),{
-    type:'line',
-    data:{
-      labels:Object.keys(d),
-      datasets:[{
-        label:'Publications per year',
-        data:Object.values(d),
-        tension:0.3
-      }]
-    },
-    options:{animation:{duration:2000}}
-  });
-});
 </script>
+{% endraw %}

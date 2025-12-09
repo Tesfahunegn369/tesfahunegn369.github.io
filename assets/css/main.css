@@ -33,8 +33,8 @@ main {
 }
 
 .profile-photo {
-  width: 75px; /* Adjust size */
-  height: 75px; /* Maintain aspect ratio */
+  width: 120px; /* Adjust size */
+  height: 120px; /* Maintain aspect ratio */
   border-radius: 50%; /* Circular photo */
   object-fit: cover; /* Ensures image doesn’t stretch */
   margin: 20px 0; /* Space around the image */

@@ -1,8 +1,8 @@
 import yaml, json, itertools
 from collections import defaultdict
 
-IN_YAML = "_data/publications.yml"
-OUT_JSON = "assets/data/coauthors.json"
+IN_YAML = "assets/data/publications.yml"
+OUT_JSON = "assets/data/coauthors_heatmap.json"
 
 def norm(n):
     return n.replace(".", "").strip().title()

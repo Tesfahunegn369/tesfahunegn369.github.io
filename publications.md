@@ -5,74 +5,60 @@ title: Publications
 
 # 연구업적 (Publications)
 
-<div style="margin:40px 0; text-align:center;">
-  <input type="text" id="search" placeholder="Search by title…" style="padding:10px; width:280px; margin:5px; font-size:1em;">
-  <input type="text" id="author" placeholder="Filter by author…" style="padding:10px; width:280px; margin:5px; font-size:1em;">
-  <select id="year" style="padding:10px; margin:5px; font-size:1em;">
+<div class="pub-controls">
+  <input type="text" id="search" placeholder="Search title…" autocomplete="off">
+  <input type="text" id="author" placeholder="Filter by author…" autocomplete="off">
+  <select id="year">
     <option value="">All years</option>
   </select>
 </div>
 
-<div style="text-align:center; margin-bottom:40px;">
-  <button onclick="setStyle('apa')"   id="btn-apa"   class="style-btn active">APA Style</button>
-  <button onclick="setStyle('ieee')"  id="btn-ieee"  class="style-btn">IEEE Style</button>
+<div class="style-toggle">
+  <button onclick="setStyle('apa')"   id="btn-apa"   class="active">APA</button>
+  <button onclick="setStyle('ieee')"  id="btn-ieee">IEEE</button>
 </div>
 
-{% assign pubs_data = site.data.publications %}
-{% if pubs_data == empty %}
-  <p>No publications found. Make sure <code>_data/publications.yml</code> exists.</p>
+{% assign data = site.data.publications %}
+{% if data == empty %}
+  <p>No publications found in <code>assets/data/publications.yml</code></p>
 {% else %}
 
-  {% comment %} Collect all publications with year {% endcomment %}
-  {% assign all_pubs = '' | split: '' %}
-  {% for year_entry in pubs_data %}
-    {% assign year = year_entry[0] %}
-    {% assign papers = year_entry[1] %}
-    {% for p in papers %}
-      {% assign pub = p | merge: { "display_year": year } %}
-      {% assign all_pubs = all_pubs | push: pub %}
+  {% assign all = '' | split: '' %}
+  {% for pair in data %}
+    {% assign year = pair[0] %}
+    {% for p in pair[1] %}
+      {% assign pub = p | merge: { year: year } %}
+      {% assign all = all | push: pub %}
     {% endfor %}
   {% endfor %}
 
-  {% assign sorted_pubs = all_pubs | sort: 'display_year' | reverse %}
-  {% assign years = sorted_pubs | map: 'display_year' | uniq | sort: 'display_year' | reverse %}
+  {% assign sorted = all | sort: 'year' | reverse %}
+  {% assign years = sorted | map: 'year' | uniq | sort | reverse %}
 
   <script>
     const years = {{ years | jsonify }};
-    const sel = document.getElementById('year');
-    years.forEach(y => sel.add(new Option(y, y)));
+    years.forEach(y => document.getElementById('year').add(new Option(y, y)));
   </script>
 
   {% for y in years %}
-    <h3 style="margin-top:60px; border-bottom:2px solid #0066cc; padding-bottom:8px; color:#222;">
-      {{ y }}
-    </h3>
-
+    <h3 class="year-header">{{ y }}</h3>
     <ol class="pub-list">
-      {% for p in sorted_pubs %}
-        {% if p.display_year == y %}
+      {% for p in sorted %}
+        {% if p.year == y %}
           <li class="pub-item"
               data-title="{{ p.title | default: '' | escape }}"
               data-authors="{{ p.authors | default: '' | escape }}"
-              data-year="{{ p.display_year }}"
+              data-year="{{ p.year }}"
               data-venue="{{ p.venue | default: '' | escape }}">
 
-            <strong class="pub-text"></strong>
+            <span class="pub-text"></span>
 
-            <span class="pub-links" style="margin-left:20px; font-size:0.95em;">
-              {% if p.pdf and p.pdf != '' %}
-                <a href="{{ p.pdf | relative_url }}" target="_blank">[PDF]</a>
+            <span class="pub-links">
+              {% if p.pdf %}<a href="{{ p.pdf | relative_url }}" target="_blank">[PDF]</a>{% endif %}
+              {% if p.doi %}
+                <a href="{% if p.doi contains 'http' %}{{ p.doi }}{% else %}https://doi.org/{{ p.doi }}{% endif %}" target="_blank">[DOI]</a>
               {% endif %}
-              {% if p.doi and p.doi != '' %}
-                {% if p.doi contains 'http' %}
-                  <a href="{{ p.doi }}" target="_blank">[DOI]</a>
-                {% else %}
-                  <a href="https://doi.org/{{ p.doi }}" target="_blank">[DOI]</a>
-                {% endif %}
-              {% endif %}
-              {% if p.bibtex and p.bibtex != '' %}
-                <a href="/bibtex/{{ p.bibtex }}.bib" download>[BibTeX]</a>
-              {% endif %}
+              {% if p.bibtex %}<a href="/bibtex/{{ p.bibtex }}.bib" download>[BibTeX]</a>{% endif %}
             </span>
           </li>
         {% endif %}
@@ -82,14 +68,42 @@ title: Publications
 {% endif %}
 
 <style>
-.pub-list {
-  counter-reset: pub-counter;
-  padding-left: 0;
+.pub-controls { text-align: center; margin: 40px 0; }
+.pub-controls input, .pub-controls select {
+  padding: 12px 16px;
+  margin: 0 8px;
+  width: 280px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 6px;
 }
+.style-toggle { text-align: center; margin-bottom: 50px; }
+.style-toggle button {
+  padding: 10px 24px;
+  margin: 0 6px;
+  font-weight: bold;
+  border: 2px solid #0066cc;
+  background: white;
+  color: #0066cc;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.style-toggle button.active {
+  background: #0066cc;
+  color: white;
+}
+.year-header {
+  margin: 60px 0 20px;
+  padding-bottom: 8px;
+  border-bottom: 3px solid #0066cc;
+  color: #222;
+  font-size: 1.8em;
+}
+.pub-list { counter-reset: pub-counter; padding-left: 0; }
 .pub-list li {
   list-style: none;
   counter-increment: pub-counter;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
   line-height: 1.7;
 }
 .pub-list li::before {
@@ -98,74 +112,64 @@ title: Publications
   color: #0066cc;
   margin-right: 6px;
 }
-.style-btn {
-  padding: 10px 22px;
-  margin: 0 8px;
-  border: 2px solid #0066cc;
-  background: white;
-  color: #0066cc;
-  font-weight: bold;
-  border-radius: 6px;
-  cursor: pointer;
-}
-.style-btn.active {
-  background: #0066cc;
-  color: white;
-}
 .pub-links a {
-  margin: 0 10px;
+  margin: 0 12px;
   color: #0066cc;
   text-decoration: none;
+  font-size: 0.95em;
 }
 .pub-links a:hover { text-decoration: underline; }
 </style>
 
 <script>
-// APA / IEEE style toggle
+function debounce(fn, delay) {
+  let t; return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), delay); };
+}
+
 function setStyle(style) {
   document.querySelectorAll('.pub-item').forEach(el => {
     const a = el.dataset.authors;
     const y = el.dataset.year;
     const t = el.dataset.title;
     const v = el.dataset.venue;
-    const text = style === 'apa'
+    el.querySelector('.pub-text').innerHTML = style === 'apa'
       ? `<strong>${a}</strong> (${y}). <em>${t}</em>. ${v}.`
       : `<strong>${a}</strong>, "${t}," <em>${v}</em>, ${y}.`;
-    el.querySelector('.pub-text').innerHTML = text;
   });
-  document.getElementById('btn-apa').classList.toggle('active', style==='apa');
-  document.getElementById('btn-ieee').classList.toggle('active', style==='ieee');
+  document.querySelectorAll('.style-toggle button').forEach(b => b.classList.remove('active'));
+  document.getElementById('btn-' + style).classList.add('active');
 }
 
-// Search & filters
-function applyFilters() {
-  const s = document.getElementById('search').value.toLowerCase();
-  const a = document.getElementById('author').value.toLowerCase();
-  const y = document.getElementById('year').value;
+function filter() {
+  const sq = document.getElementById('search').value.toLowerCase();
+  const aq = document.getElementById('author').value.toLowerCase();
+  const yq = document.getElementById('year').value;
 
   document.querySelectorAll('.pub-item').forEach(el => {
-    const title   = el.dataset.title.toLowerCase();
-    const authors = el.dataset.authors.toLowerCase();
-    const year    = el.dataset.year;
-
-    const ok = title.includes(s) && authors.includes(a) && (!y || year === y);
-    el.style.display = ok ? '' : 'none';
+    const matchTitle   = el.dataset.title.toLowerCase().includes(sq);
+    const matchAuthor  = el.dataset.authors.toLowerCase().includes(aq);
+    const matchYear    = !yq || el.dataset.year === yq;
+    el.style.display = (matchTitle && matchAuthor && matchYear) ? '' : 'none';
   });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('search').addEventListener('input', applyFilters);
-  document.getElementById('author').addEventListener('input', applyFilters);
-  document.getElementById('year').addEventListener('change', applyFilters);
-
-  setStyle('apa');   // default style
-  applyFilters();    // show all
+  const debounced = debounce(filter, 250);
+  document.getElementById('search').oninput = debounced;
+  document.getElementById('author').oninput = debounced;
+  document.getElementById('year').onchange = filter;
+  setStyle('apa');
+  filter();
 });
 </script>
 
-<hr style="margin:70px 0;">
+<hr style="margin: 80px 0; border: 0; border-top: 1px solid #eee;">
 
-<p style="text-align:center; font-size:1.1em;">
-  Complete & always up-to-date list → 
-  <a href="https://scholar.google.com/citations?user=qgSlPxcAAAAJ" target="_blank">Google Scholar Profile</a>
+<p style="text-align:center; font-size:1.1em; color:#555;">
+  Automatically synced from 
+  <a href="https://orcid.org/0000-0001-9385-1768" target="_blank">
+    <img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" alt="ORCID" style="vertical-align:middle;"> ORCID Profile
+  </a>
+  &nbsp;•&nbsp;
+  <a href="https://scholar.google.com/citations?user=qgSlPxcAAAAJ" target="_blank">Google Scholar</a>
 </p>

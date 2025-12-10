@@ -1,0 +1,187 @@
+/* =========================================================
+   GLOBAL TYPOGRAPHY – MOBILE FIRST
+========================================================= */
+
+:root {
+  scroll-padding-top: 90px;
+}
+
+body {
+  font-family: "Inter", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.65;
+}
+
+/* =========================================================
+   HEADINGS – RESPONSIVE + ACCESSIBLE
+========================================================= */
+
+h1, h2, h3, h4 {
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  margin-top: 2.2em;
+  margin-bottom: 0.6em;
+}
+
+/* Page title */
+h1 {
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  font-weight: 800;
+  border-bottom: 4px solid #0066cc;
+  padding-bottom: 0.3em;
+}
+
+/* Year headers */
+h2 {
+  font-size: clamp(1.6rem, 4vw, 2.1rem);
+  font-weight: 700;
+  border-left: 6px solid #0066cc;
+  padding-left: 0.6em;
+}
+
+/* Section headers */
+h3 {
+  font-size: clamp(1.3rem, 3.5vw, 1.7rem);
+  font-weight: 600;
+  color: #004a99;
+}
+
+/* Minor headers */
+h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #444;
+}
+
+/* =========================================================
+   SECTION DIVIDERS
+========================================================= */
+
+hr.section-divider {
+  border: none;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #ccc, transparent);
+  margin: 3em 0;
+}
+
+/* =========================================================
+   COLLAPSIBLE SECTIONS (PURE HTML – MOBILE FRIENDLY)
+========================================================= */
+
+details.section {
+  margin-bottom: 2em;
+}
+
+details.section summary {
+  cursor: pointer;
+  list-style: none;
+}
+
+details.section summary h2 {
+  display: inline;
+}
+
+details.section summary h2::after {
+  content: " +";
+  font-weight: normal;
+}
+
+details.section[open] summary h2::after {
+  content: " −";
+}
+
+/* =========================================================
+   PUBLICATION LIST STYLING
+========================================================= */
+
+.pub-list {
+  padding-left: 0;
+  margin-top: 1.5em;
+}
+
+.pub-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 18px;
+  line-height: 1.7;
+  gap: 12px;
+}
+
+.pub-number,
+.num {
+  font-weight: 700;
+  color: #0066cc;
+  min-width: 36px;
+}
+
+.pub-text,
+.text {
+  flex: 1;
+}
+
+.pub-cites,
+.cites {
+  color: #666;
+  font-size: 0.9em;
+  white-space: nowrap;
+}
+
+.pub-links a,
+.links a {
+  color: #0066cc;
+  margin-left: 8px;
+  text-decoration: none;
+  font-size: 0.9em;
+}
+
+.pub-links a:hover {
+  text-decoration: underline;
+}
+
+/* =========================================================
+   BADGES (VENUE / TOPICS / METRICS)
+========================================================= */
+
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: #eef4ff;
+  color: #0057b8;
+  margin-left: 6px;
+}
+
+/* =========================================================
+   MOBILE IMPROVEMENTS
+========================================================= */
+
+@media (max-width: 640px) {
+  .pub-item {
+    flex-direction: column;
+  }
+
+  .pub-number {
+    margin-bottom: 4px;
+  }
+}
+
+/* =========================================================
+   DARK MODE SUPPORT
+========================================================= */
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #0e1117;
+    color: #e6e6e6;
+  }
+
+  h1 { border-color: #4da3ff; }
+  h2 { border-left-color: #4da3ff; }
+  h3 { color: #9cc9ff; }
+
+  .badge {
+    background: #1a263a;
+    color: #9cc9ff;
+  }
+}

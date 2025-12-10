@@ -1,0 +1,72 @@
+/* ==================================================
+   HEADINGS – RESPONSIVE & ACCESSIBLE
+================================================== */
+
+h1, h2, h3, h4 {
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  margin-top: 2.2em;
+  margin-bottom: 0.6em;
+}
+
+/* Page title */
+h1 {
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  font-weight: 800;
+  border-bottom: 4px solid #0066cc;
+  padding-bottom: 0.3em;
+}
+
+/* Year sections */
+h2 {
+  font-size: clamp(1.6rem, 4vw, 2.1rem);
+  font-weight: 700;
+  border-left: 6px solid #0066cc;
+  padding-left: 0.6em;
+}
+
+/* Sub-sections */
+h3 {
+  font-size: clamp(1.3rem, 3.5vw, 1.7rem);
+  font-weight: 600;
+  color: #004a99;
+}
+
+/* Minor headings */
+h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #444;
+}
+
+/* ==================================================
+   COLLAPSIBLE SECTIONS (PURE HTML)
+================================================== */
+
+details.section {
+  margin-bottom: 2em;
+}
+
+details.section summary {
+  cursor: pointer;
+  list-style: none;
+}
+
+details.section summary h2 {
+  display: inline;
+}
+
+details.section summary h2::after {
+  content: " +";
+}
+
+details.section[open] summary h2::after {
+  content: " −";
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  h1 { border-color: #4da3ff; }
+  h2 { border-left-color: #4da3ff; }
+  h3 { color: #9cc9ff; }
+}

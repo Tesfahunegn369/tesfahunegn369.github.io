@@ -1,0 +1,84 @@
+/* ==================================================
+   PUBLICATION LIST
+================================================== */
+
+.pub-list {
+  padding-left: 0;
+  margin-top: 1.5em;
+}
+
+.pub-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 18px;
+  line-height: 1.7;
+}
+
+.pub-number,
+.num {
+  font-weight: 700;
+  color: #0066cc;
+  min-width: 36px;
+}
+
+.pub-text,
+.text {
+  flex: 1;
+}
+
+.pub-cites,
+.cites {
+  color: #666;
+  font-size: 0.9em;
+  white-space: nowrap;
+}
+
+.pub-links a,
+.links a {
+  color: #0066cc;
+  margin-left: 8px;
+  text-decoration: none;
+  font-size: 0.9em;
+}
+
+.pub-links a:hover {
+  text-decoration: underline;
+}
+
+/* ==================================================
+   BADGES (VENUE / METRICS)
+================================================== */
+
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: #eef4ff;
+  color: #0057b8;
+  margin-left: 6px;
+}
+
+/* ==================================================
+   MOBILE IMPROVEMENTS
+================================================== */
+
+@media (max-width: 640px) {
+  .pub-item {
+    flex-direction: column;
+  }
+
+  .pub-number {
+    margin-bottom: 4px;
+  }
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  .badge {
+    background: #1a263a;
+    color: #9cc9ff;
+  }
+}

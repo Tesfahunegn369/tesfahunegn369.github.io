@@ -2,7 +2,7 @@ name: Generate Analytics
 
 on:
   schedule:
-    - cron: '0 4 * * 0'  # weekly
+    - cron: '0 2 * * 0'  # weekly
   workflow_dispatch:
 
 jobs:

@@ -2,13 +2,24 @@
 # Auto-generated from Google Scholar: https://scholar.google.com/citations?user=qgSlPxcAAAAJ
 # Updated: December 09, 2025
 # Add PDFs/DOIs manually as needed
+2026:
+  - authors: "TM Mengistu; KM Faisal; T Kim; A Ullah; W Choi"
+    title: "Learning-based approaches for wireless PHY layers from the perspective of conventional machine learning to foundation models: A comprehensive survey"
+    venue: "Computer Science Review"
+    year: 2026
+    doi: "https://doi.org/10.1016/j.cosrev.2025.100870"
+    pdf: ""
+    bibtex: "MENGISTU2026100870"
+    gs_id: ""
+    citations: 0
+    thumbnail: ""
 
 2025:
   - authors: "TM Mengistu; T Kim"
     title: "Optimizing Federated Learning on Non-IID Data with Cosine Similarity-Driven Client Selection and Retraining"
     venue: "IEEE"
     year: 2025
-    doi: ""
+    doi: "https://doi.org/10.1109/ICMIC66299.2025.11257822"
     pdf: ""
     bibtex: "mengistu2025optimizing"
     gs_id: ""
@@ -21,11 +32,11 @@
     title: "A Survey on Heterogeneity Taxonomy, Security and Privacy Preservation in the Integration of IoT, Wireless Sensor Networks and Federated Learning"
     venue: "Sensors, 24(3)"
     year: 2024
-    doi: ""
+    doi: "https://doi.org/10.3390/s24030968"
     pdf: ""
     bibtex: "mengistu2024survey"
     gs_id: ""
-    citations: 57
+    citations: 58
     thumbnail: ""
 
   - authors: "TM Mengistu; JW Lin; PH Kuo; T Kim"

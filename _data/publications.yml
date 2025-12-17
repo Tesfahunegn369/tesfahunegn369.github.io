@@ -30,7 +30,7 @@
 2024:
   - authors: "TM Mengistu; T Kim; JW Lin"
     title: "A Survey on Heterogeneity Taxonomy, Security and Privacy Preservation in the Integration of IoT, Wireless Sensor Networks and Federated Learning"
-    venue: "Sensors, 24(3)"
+    venue: "Sensors"
     year: 2024
     doi: "https://doi.org/10.3390/s24030968"
     pdf: ""
@@ -43,7 +43,7 @@
     title: "Optimal Model Transfer and Dynamic Parameter Server Selection for Efficient Federated Learning in IoT-Edge Systems with Non-IID Data"
     venue: "IEEE Access"
     year: 2024
-    doi: ""
+    doi: "https://doi.org/10.1109/ACCESS.2024.3487073"
     pdf: ""
     bibtex: "mengistu2024optimal"
     gs_id: ""
@@ -54,7 +54,7 @@
     title: "Breast Cancer Stage Identification Using Machine Learning"
     venue: "Advancement of Science and Technology: AI, Machine Learning"
     year: 2024
-    doi: ""
+    doi: "https://doi.org/10.1007/978-3-031-64151-0_3"
     pdf: ""
     bibtex: "arega2024breast"
     gs_id: ""
@@ -63,7 +63,7 @@
     
   - authors: "A Birhane; F Shewarega; MA Bitew; M Wagaw; AA Ashetehe"
     title: "11th EAI International Conference on Advancements of Science and Technology: ICAST 2023"
-    venue: "Springer"
+    venue: "Springer Nature"
     year: 2024
     doi: ""
     pdf: ""
@@ -76,9 +76,9 @@
 2023:
   - authors: "TM Mengistu; BS Arega; BH Belay"
     title: "Transfer Learning with Pre-trained CNNs for Breast Cancer Stage Identification"
-    venue: "Artificial Intelligence and Digitalization for Sustainable Development, 127"
+    venue: "Springer Nature"
     year: 2023
-    doi: ""
+    doi: "https://doi.org/10.1007/978-3-031-28725-1_8"
     pdf: ""
     bibtex: "mengistu2023transfer"
     gs_id: ""
@@ -111,9 +111,9 @@
 
   - authors: "TM Mengistu; AB Habtie; FG Mengistu"
     title: "Design and Development of an Autonomous Smart Stick Framework for Assisting Visually Impaired People"
-    venue: "Advances of Science and Technology, 586"
+    venue: "Springer Nature"
     year: 2022
-    doi: ""
+    doi: "https://doi.org/10.1007/978-3-030-93709-6_40"
     pdf: ""
     bibtex: "mengistu2022design"
     gs_id: ""
@@ -122,9 +122,9 @@
 
   - authors: "HT Gebremichael; TM Mengistu; MM Beyene; FG Mengistu"
     title: "OCR System for the Recognition of Ethiopic Real-Life Documents"
-    venue: "Advances of Science and Technology, 559"
+    venue: "Springer Nature"
     year: 2022
-    doi: ""
+    doi: "https://doi.org/10.1007/978-3-030-93709-6_38"
     pdf: ""
     bibtex: "gebremichael2022ocr"
     gs_id: ""

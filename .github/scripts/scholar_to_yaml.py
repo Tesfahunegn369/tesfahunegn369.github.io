@@ -1,6 +1,185 @@
 #!/usr/bin/env python3
 # .github/scripts/scholar_to_yaml.py
 
+import os
+import re
+import time
+import yaml
+import sys
+from scholarly import scholarly
+from scholarly import ProxyGenerator
+
+# =====================
+# CONFIG
+# =====================
+SCHOLAR_ID = os.environ.get("SCHOLAR_ID", "qgSlPxcAAAAJ")
+YAML_FILE = "_data/publications.yml"
+METRICS_FILE = "_data/gs_metrics.yml"
+
+MAX_RETRIES = 5
+RETRY_DELAY = 10  # seconds
+
+
+# =====================
+# SCHOLAR SETUP (IMPORTANT FOR CI)
+# =====================
+def setup_scholarly():
+    """
+    Configure scholarly to work in GitHub Actions
+    """
+    pg = ProxyGenerator()
+
+    # Free proxies (slow but works for CI)
+    pg.FreeProxies()
+
+    scholarly.use_proxy(pg)
+
+
+# =====================
+# YAML HELPERS
+# =====================
+def load_yaml():
+    if os.path.exists(YAML_FILE):
+        with open(YAML_FILE, "r", encoding="utf-8") as f:
+            return yaml.safe_load(f) or {}
+    return {}
+
+
+def save_yaml(data):
+    os.makedirs(os.path.dirname(YAML_FILE) or ".", exist_ok=True)
+    with open(YAML_FILE, "w", encoding="utf-8") as f:
+        yaml.dump(data, f, sort_keys=False, allow_unicode=True)
+
+
+def save_metrics(metrics):
+    os.makedirs(os.path.dirname(METRICS_FILE) or ".", exist_ok=True)
+    with open(METRICS_FILE, "w", encoding="utf-8") as f:
+        yaml.dump(metrics, f, allow_unicode=True)
+
+
+# =====================
+# SAFE SCHOLAR CALLS
+# =====================
+def get_author_with_retry(scholar_id):
+    for attempt in range(1, MAX_RETRIES + 1):
+        try:
+            print(f"[INFO] Fetching author (attempt {attempt})")
+            author = scholarly.search_author_id(scholar_id)
+            author = scholarly.fill(author, sections=["publications", "indices"])
+            return author
+        except Exception as e:
+            print(f"[WARN] Scholar fetch failed: {e}")
+            if attempt < MAX_RETRIES:
+                time.sleep(RETRY_DELAY * attempt)
+            else:
+                raise RuntimeError("Failed to fetch Google Scholar profile after retries")
+
+
+def fill_publication_safe(pub):
+    try:
+        return scholarly.fill(pub)
+    except Exception:
+        return None
+
+
+# =====================
+# MAIN LOGIC
+# =====================
+def author_to_yaml():
+    setup_scholarly()
+
+    author = get_author_with_retry(SCHOLAR_ID)
+    publications = author.get("publications", [])
+
+    yaml_data = load_yaml()
+
+    for pub in publications:
+        filled_pub = fill_publication_safe(pub)
+        if not filled_pub:
+            continue
+
+        bib = filled_pub.get("bib", {})
+        title = bib.get("title", "Untitled")
+        authors = bib.get("author", "")
+        year = bib.get("pub_year")
+        venue = bib.get("venue") or bib.get("journal", "")
+        citations = filled_pub.get("num_citations", 0)
+        gs_pub_id = pub.get("author_pub_id", "")
+
+        if not year:
+            continue
+
+        # Clean authors
+        if isinstance(authors, str):
+            authors_clean = "; ".join(a.strip() for a in authors.split(" and "))
+        else:
+            authors_clean = ""
+
+        # Generate bibkey
+        first_author = authors_clean.split(";")[0] if authors_clean else "pub"
+        bibkey = re.sub(r"[^a-zA-Z0-9]", "", first_author.lower()) + str(year)
+
+        item = {
+            "title": title,
+            "authors": authors_clean,
+            "venue": venue,
+            "year": int(year),
+            "keywords": [],
+            "doi": "",
+            "bibtex": bibkey,
+            "pdf": "",
+            "thumbnail": "",
+            "gs_id": gs_pub_id,
+            "citations": int(citations or 0),
+        }
+
+        yaml_data.setdefault(str(year), [])
+
+        # Avoid duplicates (title-based)
+        existing_titles = [
+            p.get("title", "").strip().lower()
+            for p in yaml_data[str(year)]
+        ]
+
+        if title.strip().lower() not in existing_titles:
+            yaml_data[str(year)].append(item)
+
+        # Be polite to Google Scholar
+        time.sleep(1)
+
+    # Sort years descending
+    yaml_data = dict(sorted(yaml_data.items(), key=lambda x: int(x[0]), reverse=True))
+    save_yaml(yaml_data)
+
+    # =====================
+    # METRICS
+    # =====================
+    indices = author.get("indices", {})
+    metrics = {
+        "h_index": indices.get("hindex", 0),
+        "i10_index": indices.get("i10index", 0),
+        "total_citations": author.get("citedby", 0),
+        "cited_by_year": author.get("citedby_year", {}),
+    }
+    save_metrics(metrics)
+
+    print("[SUCCESS] Publications and metrics updated")
+
+
+# =====================
+# ENTRY POINT
+# =====================
+if __name__ == "__main__":
+    try:
+        author_to_yaml()
+    except Exception as e:
+        print(f"[ERROR] {e}")
+        sys.exit(1)
+
+'''
+#!/usr/bin/env python3
+# .github/scripts/scholar_to_yaml.py
+
 from scholarly import scholarly
 import yaml, re, os, sys, time
 
@@ -86,3 +265,4 @@ def author_to_yaml():
 
 if __name__ == "__main__":
     author_to_yaml()
+'''

@@ -11,7 +11,7 @@
     pdf: ""
     bibtex: "MENGISTU2026100870"
     gs_id: ""
-    citations: 0
+    citations: 1
     thumbnail: ""
 
 2025:
@@ -36,7 +36,7 @@
     pdf: ""
     bibtex: "mengistu2024survey"
     gs_id: ""
-    citations: 58
+    citations: 72
     thumbnail: ""
 
   - authors: "TM Mengistu; JW Lin; PH Kuo; T Kim"
@@ -128,5 +128,5 @@
     pdf: ""
     bibtex: "gebremichael2022ocr"
     gs_id: ""
-    citations: 2
+    citations: 3
     thumbnail: ""

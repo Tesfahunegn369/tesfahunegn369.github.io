@@ -3,6 +3,18 @@
 # Updated: December 09, 2025
 # Add PDFs/DOIs manually as needed
 
+2026:
+  - authors: "TM Mengistu; KM Faisal; Taewoon Kim; T Kim; Arif Ullah; Wooyeol Choi "
+    title: "Learning-based approaches for wireless PHY layers from the perspective of conventional machine learning to foundation models: A comprehensive survey"
+    venue: "Elisver"
+    year: 2026
+    doi: ""
+    pdf: ""
+    bibtex: "mengistu2026foundationmodels"
+    gs_id: ""
+    citations: 1
+    thumbnail: ""
+
 2025:
   - authors: "TM Mengistu; T Kim"
     title: "Optimizing Federated Learning on Non-IID Data with Cosine Similarity-Driven Client Selection and Retraining"
@@ -25,7 +37,7 @@
     pdf: ""
     bibtex: "mengistu2024survey"
     gs_id: ""
-    citations: 57
+    citations: 72
     thumbnail: ""
 
   - authors: "TM Mengistu; JW Lin; PH Kuo; T Kim"

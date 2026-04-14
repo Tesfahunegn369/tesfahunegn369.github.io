@@ -35,8 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const authorName = slug.replace(/-/g,' ').toUpperCase();
 
   document.getElementById("coauthor-name").textContent = authorName;
-  document.getElementById("coauthor-meta").textContent =
-    "Co-author profile";
+  document.getElementById("coauthor-meta").textContent = " ";
 
   // ---------- COLLECT PAPERS ----------
   let papers = [];

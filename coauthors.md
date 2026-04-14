@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if(!papers.length){
     document.getElementById("papers").innerHTML =
-      "<li> </li>";
+      "<li> <a href="/publications">Publications</a>  </li>";
     return;
   }
 

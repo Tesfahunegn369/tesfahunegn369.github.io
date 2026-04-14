@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.getElementById("coauthor-name").textContent = authorName;
   document.getElementById("coauthor-meta").textContent =
-    "Automatically generated co-author profile";
+    "Co-author profile";
 
   // ---------- COLLECT PAPERS ----------
   let papers = [];

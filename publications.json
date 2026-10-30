@@ -1,0 +1,79 @@
+{
+  "updated_at": null,
+  "source": "Curated records; the automated sync merges new Google Scholar / OpenAlex data into this file",
+  "profile_url": "https://scholar.google.com/citations?user=qgSlPxcAAAAJ",
+  "orcid": "0000-0001-9385-1768",
+  "count": 7,
+  "publications": [
+    {
+      "title": "Learning-based approaches for wireless PHY layers from the perspective of conventional machine learning to foundation models: A comprehensive survey",
+      "authors": "Tesfahunegn Minwuyelet Mengistu, K M Faisal, Taewoon Kim, Arif Ullah, Wooyeol Choi",
+      "year": 2026,
+      "venue": "Computer Science Review",
+      "url": "https://doi.org/10.1016/j.cosrev.2025.100870",
+      "doi": "10.1016/j.cosrev.2025.100870",
+      "doi_url": "https://doi.org/10.1016/j.cosrev.2025.100870",
+      "scholar_url": "https://scholar.google.com/citations?user=qgSlPxcAAAAJ"
+    },
+    {
+      "title": "Natural language processing at the crossroads: Integrating federated and reinforcement learning for emerging intelligent systems",
+      "authors": "Tesfahunegn Minwuyelet Mengistu, K M Faisal, Wooyeol Choi, Taewoon Kim",
+      "year": 2026,
+      "venue": "Computer Science Review",
+      "url": "https://doi.org/10.1016/j.cosrev.2026.101014",
+      "doi": "10.1016/j.cosrev.2026.101014",
+      "doi_url": "https://doi.org/10.1016/j.cosrev.2026.101014",
+      "scholar_url": "https://scholar.google.com/citations?user=qgSlPxcAAAAJ"
+    },
+    {
+      "title": "A Survey on Heterogeneity Taxonomy, Security and Privacy Preservation in the Integration of IoT, Wireless Sensor Networks and Federated Learning",
+      "authors": "Tesfahunegn Minwuyelet Mengistu, Taewoon Kim, Jenn-Wei Lin",
+      "year": 2024,
+      "venue": "Sensors, 24(3), Article 968",
+      "url": "https://doi.org/10.3390/s24030968",
+      "doi": "10.3390/s24030968",
+      "doi_url": "https://doi.org/10.3390/s24030968",
+      "scholar_url": "https://scholar.google.com/citations?user=qgSlPxcAAAAJ"
+    },
+    {
+      "title": "Optimal Model Transfer and Dynamic Parameter Server Selection for Efficient Federated Learning in IoT-Edge Systems With Non-IID Data",
+      "authors": "Tesfahunegn Minwuyelet Mengistu, Jenn-Wei Lin, Po-Hsien Kuo, Taewoon Kim",
+      "year": 2024,
+      "venue": "IEEE Access",
+      "url": "https://doi.org/10.1109/ACCESS.2024.3487073",
+      "doi": "10.1109/ACCESS.2024.3487073",
+      "doi_url": "https://doi.org/10.1109/ACCESS.2024.3487073",
+      "scholar_url": "https://scholar.google.com/citations?user=qgSlPxcAAAAJ"
+    },
+    {
+      "title": "Transfer Learning with Pre-trained CNNs for Breast Cancer Stage Identification",
+      "authors": "Tesfahunegn Minwuyelet Mengistu, Birtukan Shegaw Arega, Birhanu Hailu Belay",
+      "year": 2023,
+      "venue": "Lecture Notes of the Institute for Computer Sciences, Social-Informatics and Telecommunications Engineering",
+      "url": "https://doi.org/10.1007/978-3-031-28725-1_8",
+      "doi": "10.1007/978-3-031-28725-1_8",
+      "doi_url": "https://doi.org/10.1007/978-3-031-28725-1_8",
+      "scholar_url": "https://scholar.google.com/citations?user=qgSlPxcAAAAJ"
+    },
+    {
+      "title": "Design and Development of an Autonomous Smart Stick Framework for Assisting Visually Impaired People",
+      "authors": "Tesfahunegn Minwuyelet Mengistu, Ayalew Belay Habtie, Fikreselam Gared Mengistu",
+      "year": 2022,
+      "venue": "Advances of Science and Technology (ICAST 2021), Springer",
+      "url": "https://doi.org/10.1007/978-3-030-93709-6_40",
+      "doi": "10.1007/978-3-030-93709-6_40",
+      "doi_url": "https://doi.org/10.1007/978-3-030-93709-6_40",
+      "scholar_url": "https://scholar.google.com/citations?user=qgSlPxcAAAAJ"
+    },
+    {
+      "title": "OCR System for the Recognition of Ethiopic Real-Life Documents",
+      "authors": "Hagos Tesfahun Gebremichael, Tesfahunegn Minwuyelet Mengistu, Million Mesheha Beyene, Fikreselam Gared Mengistu",
+      "year": 2022,
+      "venue": "Advances of Science and Technology (ICAST 2021), Springer",
+      "url": "https://doi.org/10.1007/978-3-030-93709-6_38",
+      "doi": "10.1007/978-3-030-93709-6_38",
+      "doi_url": "https://doi.org/10.1007/978-3-030-93709-6_38",
+      "scholar_url": "https://scholar.google.com/citations?user=qgSlPxcAAAAJ"
+    }
+  ]
+}

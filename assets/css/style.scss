@@ -1,0 +1,15 @@
+.pub-list {
+  counter-reset: pub-counter;
+  padding-left: 0;
+}
+
+.pub-list li {
+  list-style: none;
+  counter-increment: pub-counter;
+  margin-bottom: 14px;
+}
+
+.pub-list li::before {
+  content: "[" counter(pub-counter) "] ";
+  font-weight: bold;
+}

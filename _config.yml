@@ -1,0 +1,31 @@
+sass:
+  sass_dir: _sass
+  style: compressed
+title: Tesfahunegn Minwuyelet Mengistu
+description: PhD Candidate in Computer Engineering | Lecturer | Researcher
+author: Tesfahunegn M. Mengistu
+url: https://tesfahunegn369.github.io
+baseurl: ""
+theme: minima
+markdown: kramdown
+google_analytics: G-JJWG7W09HG
+languages:
+  - en
+  - kr
+header_pages:
+  - index.md
+  - publications.md
+  - metrics.md
+  - bibtex.md
+  - grants.md
+  - projects.md
+  - courses/index.md
+  - teaching.md
+  - group.md
+  - collaborations/index.md
+  - blog.md
+  - apply.md
+  - cv.md
+  - contact.md
+  - lab/index.md
+  - coauthors.md

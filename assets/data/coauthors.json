@@ -1,0 +1,70 @@
+{
+  "nodes": [
+    { "id": "TM Mengistu", "count": 7 },
+    { "id": "T Kim", "count": 3 },
+    { "id": "JW Lin", "count": 2 },
+    { "id": "PH Kuo", "count": 1 },
+    { "id": "BS Arega", "count": 2 },
+    { "id": "BH Belay", "count": 1 },
+    { "id": "AB Habtie", "count": 1 },
+    { "id": "FG Mengistu", "count": 2 },
+    { "id": "HT Gebremichael", "count": 1 },
+    { "id": "MM Beyene", "count": 1 },
+    { "id": "A Birhane", "count": 1 },
+    { "id": "F Shewarega", "count": 1 },
+    { "id": "MA Bitew", "count": 2 },
+    { "id": "M Wagaw", "count": 1 },
+    { "id": "AA Ashetehe", "count": 1 },
+    { "id": "BH Woldegiorgis", "count": 1 },
+    { "id": "K Mequanint", "count": 1 },
+    { "id": "TB Beza", "count": 1 },
+    { "id": "AM Yibre", "count": 1 },
+    { "id": "ML Berihun", "count": 1 }
+  ],
+  "links": [
+    { "source": "TM Mengistu", "target": "T Kim", "weight": 3 },
+    { "source": "TM Mengistu", "target": "JW Lin", "weight": 2 },
+    { "source": "TM Mengistu", "target": "PH Kuo", "weight": 1 },
+    { "source": "TM Mengistu", "target": "BS Arega", "weight": 2 },
+    { "source": "TM Mengistu", "target": "BH Belay", "weight": 1 },
+    { "source": "TM Mengistu", "target": "AB Habtie", "weight": 1 },
+    { "source": "TM Mengistu", "target": "FG Mengistu", "weight": 2 },
+    { "source": "TM Mengistu", "target": "HT Gebremichael", "weight": 1 },
+    { "source": "TM Mengistu", "target": "MM Beyene", "weight": 1 },
+
+    { "source": "T Kim", "target": "JW Lin", "weight": 1 },
+    { "source": "T Kim", "target": "PH Kuo", "weight": 1 },
+
+    { "source": "JW Lin", "target": "PH Kuo", "weight": 1 },
+
+    { "source": "BS Arega", "target": "BH Belay", "weight": 1 },
+
+    { "source": "AB Habtie", "target": "FG Mengistu", "weight": 1 },
+
+    { "source": "HT Gebremichael", "target": "FG Mengistu", "weight": 1 },
+    { "source": "HT Gebremichael", "target": "MM Beyene", "weight": 1 },
+    { "source": "MM Beyene", "target": "FG Mengistu", "weight": 1 },
+
+    { "source": "A Birhane", "target": "F Shewarega", "weight": 1 },
+    { "source": "A Birhane", "target": "MA Bitew", "weight": 1 },
+    { "source": "A Birhane", "target": "M Wagaw", "weight": 1 },
+    { "source": "A Birhane", "target": "AA Ashetehe", "weight": 1 },
+    { "source": "F Shewarega", "target": "MA Bitew", "weight": 1 },
+    { "source": "F Shewarega", "target": "M Wagaw", "weight": 1 },
+    { "source": "F Shewarega", "target": "AA Ashetehe", "weight": 1 },
+    { "source": "MA Bitew", "target": "M Wagaw", "weight": 1 },
+    { "source": "MA Bitew", "target": "AA Ashetehe", "weight": 1 },
+    { "source": "M Wagaw", "target": "AA Ashetehe", "weight": 1 },
+
+    { "source": "BH Woldegiorgis", "target": "K Mequanint", "weight": 1 },
+    { "source": "BH Woldegiorgis", "target": "MA Bitew", "weight": 1 },
+    { "source": "BH Woldegiorgis", "target": "TB Beza", "weight": 1 },
+    { "source": "BH Woldegiorgis", "target": "AM Yibre", "weight": 1 },
+    { "source": "K Mequanint", "target": "MA Bitew", "weight": 1 },
+    { "source": "K Mequanint", "target": "TB Beza", "weight": 1 },
+    { "source": "K Mequanint", "target": "AM Yibre", "weight": 1 },
+    { "source": "MA Bitew", "target": "TB Beza", "weight": 1 },
+    { "source": "MA Bitew", "target": "AM Yibre", "weight": 1 },
+    { "source": "TB Beza", "target": "AM Yibre", "weight": 1 }
+  ]
+}

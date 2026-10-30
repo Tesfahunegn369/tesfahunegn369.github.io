@@ -59,3 +59,10 @@ Local test: `pip install requests scholarly && python scripts/update_publication
 * **Dates.** Vice Dean 2021–2023 and Acting Dean Jun–Aug 2023 follow your Global Scholarships and Earth Charter pages.
 * No CV file was supplied. Add `cv.pdf` and a link in the hero if you want one.
 * Machine translation is by Google Translate and may be unavailable if a browser or network blocks it.
+
+Academic website for Tesfahunegn Minwuyelet Mengistu — ready for GitHub Pages.
+Instructions:
+1. Replace YOUR_GITHUB_USERNAME in _config.yml url
+2. Update assets/files/orcid.bib with your ORCID .bib export
+3. Run `python3 scripts/generate_cv.py` locally to regenerate cv_auto.md from ORCID bib
+4. Push to a repository named YOUR_GITHUB_USERNAME.github.io and enable Pages.

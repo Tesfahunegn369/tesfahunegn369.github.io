@@ -1,0 +1,50 @@
+/* ==================================================
+   GLOBAL UTILITIES & RESET
+================================================== */
+
+:root {
+  scroll-padding-top: 90px;
+}
+
+body {
+  font-family: "Inter", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.65;
+}
+
+/* Smooth anchors */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Section divider */
+hr.section-divider {
+  border: none;
+  height: 1px;
+  margin: 3em 0;
+  background: linear-gradient(to right, transparent, #ccc, transparent);
+}
+
+/* ==================================================
+   MOBILE HELPERS
+================================================== */
+
+@media (max-width: 640px) {
+  .hide-mobile {
+    display: none;
+  }
+}
+
+/* ==================================================
+   DARK MODE
+================================================== */
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #0e1117;
+    color: #e6e6e6;
+  }
+
+  hr.section-divider {
+    background: linear-gradient(to right, transparent, #333, transparent);
+  }
+}

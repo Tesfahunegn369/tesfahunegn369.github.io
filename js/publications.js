@@ -7,6 +7,8 @@
     try { const u = new URL(value, window.location.href); return ['http:', 'https:'].includes(u.protocol) ? u.href : ''; }
     catch { return ''; }
   };
+  // Name variants to bold in author lists (add more here if a source spells it differently).
+  const MY_NAME = /(Tesfahunegn(?:\s+M\.?|\s+Minwuyelet)?\s+Mengistu|\bT\.?\s?M\.?\s+Mengistu)/i;
   function render(data) {
     const publications = Array.isArray(data.publications) ? data.publications.slice() : [];
     publications.sort((a,b) => (Number(b.year)||0) - (Number(a.year)||0) || String(a.title||'').localeCompare(String(b.title||'')));
@@ -29,7 +31,16 @@
       if (titleUrl) { const a = document.createElement('a'); a.href = titleUrl; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.textContent = p.title || 'Untitled publication'; title.appendChild(a); }
       else title.textContent = p.title || 'Untitled publication';
       article.appendChild(title);
-      if (p.authors) { const authors = document.createElement('p'); authors.textContent = p.authors; article.appendChild(authors); }
+      if (p.authors) {
+        const authors = document.createElement('p');
+        // Odd-numbered pieces from split() are the matched name, which is shown in bold.
+        String(p.authors).split(MY_NAME).forEach((part, i) => {
+          if (!part) return;
+          if (i % 2 === 1) { const b = document.createElement('strong'); b.textContent = part; authors.appendChild(b); }
+          else authors.appendChild(document.createTextNode(part));
+        });
+        article.appendChild(authors);
+      }
       const venue = [p.venue, p.volume, p.pages].filter(Boolean).join(', ');
       if (venue) { const meta = document.createElement('p'); meta.className = 'entry-place'; meta.textContent = venue; article.appendChild(meta); }
       const details = [];

@@ -16,7 +16,9 @@
       status.textContent = 'The automatic publication sync has not populated this list yet. You can view the current record on Google Scholar using the link below.';
       return;
     }
-    status.textContent = `Loaded ${publications.length} publication${publications.length === 1 ? '' : 's'}${data.updated_at ? ` · Last updated ${data.updated_at}` : ''}${data.source ? ` · Source: ${data.source}` : ''}.`;
+    //status.textContent = `Loaded ${publications.length} publication${publications.length === 1 ? '' : 's'}${data.updated_at ? ` · Last updated ${data.updated_at}` : ''}${data.source ? ` · Source: ${data.source}` : ''}.`;
+    //status.textContent = `${publications.length} publication${publications.length === 1 ? '' : 's'}`;
+    status.textContent = `${publications.length} publications${data.updated_at ? ` · Last updated ${data.updated_at}` : ''}`;
     let currentYear = null;
     for (const p of publications) {
       const year = String(p.year || 'Year not listed');

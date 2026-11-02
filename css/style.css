@@ -148,6 +148,8 @@ body { top: 0 !important; }
 /* ---- dark mode ---- */
 .theme-toggle { border: 1px solid var(--line); background: var(--paper); color: var(--navy); width: 36px; height: 34px; border-radius: 4px; font-size: 17px; line-height: 1; cursor: pointer; }
 .theme-toggle:hover { border-color: var(--accent); }
+.theme-toggle { display: inline-flex; align-items: center; justify-content: center; }
+.theme-toggle svg { display: block; }
 @media (max-width: 720px) { .theme-toggle { order: 1; } }
 :root[data-theme="dark"] { color-scheme: dark; --ink: #e6eaee; --muted: #9aa6b2; --navy: #a9c7e6; --accent: #7fb0dc; --line: #2d3641; --soft: #1a2028; --paper: #12171d; }
 :root[data-theme="dark"] .site-header { background: rgba(18,23,29,.96); }

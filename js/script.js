@@ -9,10 +9,13 @@
     // Dark mode: the starting theme is set by a tiny script in <head>; this wires up the button.
   const themeBtn = document.getElementById('theme-toggle');
   const root = document.documentElement;
+    const MOON = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+  const SUN = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="5" fill="currentColor"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>';
   const paintThemeButton = () => {
     if (!themeBtn) return;
     const dark = root.getAttribute('data-theme') === 'dark';
-    themeBtn.textContent = dark ? '☀' : '☾';
+    themeBtn.innerHTML = dark ? SUN : MOON;
+    //themeBtn.textContent = dark ? '☀' : '☾';
     //themeBtn.textContent = dark ? '☁' : '☀';
     themeBtn.setAttribute('aria-pressed', String(dark));
     const label = dark ? 'Switch to light mode' : 'Switch to dark mode';

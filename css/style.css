@@ -160,3 +160,19 @@ body { top: 0 !important; }
 :root[data-theme="dark"] .button-primary:hover { color: #0f1720; background: #c6dcf1; }
 :root[data-theme="dark"] .profile-photo { filter: brightness(.92); }
 @media print { :root[data-theme="dark"] { --ink: #252b32; --muted: #66717d; --navy: #17324d; --accent: #315b7d; --line: #e3e8ed; --soft: #f6f8fa; --paper: #fff; } }
+/* ---- justified text ---- */
+.intro,
+#about .section-body p,
+.card p,
+.entry p {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+@media (max-width: 720px) {
+  .intro,
+  #about .section-body p,
+  .card p,
+  .entry p { text-align: left; hyphens: manual; }
+}

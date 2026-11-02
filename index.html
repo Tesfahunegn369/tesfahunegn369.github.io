@@ -181,7 +181,22 @@
 
         </div>
         <p><a class="button button-primary" href="#publications">Browse publications</a></p>
-        <p><strong>Email:</strong> <a href="mailto:tesfahunegn9@gmail.com">tesfahunegn9@gmail.com</a> · <a href="mailto:tesfahunegn9@pusan.ac.kr">tesfahunegn9@pusan.ac.kr</a></p>
+        <!--<p><strong>Email:</strong> <a href="mailto:tesfahunegn9@gmail.com">tesfahunegn9@gmail.com</a> · <a href="mailto:tesfahunegn9@pusan.ac.kr">tesfahunegn9@pusan.ac.kr</a></p>-->
+        <p><strong>Email:</strong><script type="text/javascript">
+          // Personal Email setup
+          var p_user = "tesfahunegn9";
+          var p_domain = "gmail.com";
+          
+          // Institutional Email setup
+          var i_user = "tesfahunegn9";
+          var i_domain = "pusan.ac.kr";
+
+          // Writing the links to the page
+          document.write('<a href="mailto:' + p_user + '@' + p_domain + '">Personal Email</a>');
+          document.write(' | '); // Separator line between the links
+          document.write('<a href="mailto:' + i_user + '@' + i_domain + '">Institutional Email</a>');
+        </script>
+      </p>
       </div>
     </section>
 
@@ -312,7 +327,7 @@
        <script type="text/javascript">
           var user = "tesfahunegn9";
           var domain = "gmail.com";
-          document.write('<a href="mailto:' + user + '@' + domain + '">Contact Tesfahunegn</a>');
+          document.write('<a href="mailto:' + user + '@' + domain + '">Tesfahunegn</a>');
         </script>
         <noscript>Please enable JavaScript to view our email address.</noscript>
         </p>
@@ -320,7 +335,7 @@
         <script type="text/javascript">
           var user = "tesfahunegn9";
           var domain = "pusan.ac.kr";
-          document.write('<a href="mailto:' + user + '@' + domain + '">Contact Tesfahunegn</a>');
+          document.write('<a href="mailto:' + user + '@' + domain + '">Tesfahunegn</a>');
         </script>
         <noscript>Please enable JavaScript to view our email address.</noscript>
         </p>

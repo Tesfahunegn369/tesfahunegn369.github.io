@@ -5,6 +5,34 @@
   const languageSelect = document.getElementById('language-select');
 
   if (year) year.textContent = new Date().getFullYear();
+  
+    // Dark mode: the starting theme is set by a tiny script in <head>; this wires up the button.
+  const themeBtn = document.getElementById('theme-toggle');
+  const root = document.documentElement;
+  const paintThemeButton = () => {
+    if (!themeBtn) return;
+    const dark = root.getAttribute('data-theme') === 'dark';
+    themeBtn.textContent = dark ? '☀' : '☾';
+    themeBtn.setAttribute('aria-pressed', String(dark));
+    const label = dark ? 'Switch to light mode' : 'Switch to dark mode';
+    themeBtn.setAttribute('aria-label', label);
+    themeBtn.title = label;
+  };
+  paintThemeButton();
+  themeBtn?.addEventListener('click', () => {
+    const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('academic-site-theme', next); } catch (_) {}
+    paintThemeButton();
+  });
+  // Follow the device setting until the visitor chooses a theme themselves.
+  window.matchMedia?.('(prefers-color-scheme: dark)').addEventListener?.('change', event => {
+    let saved = null;
+    try { saved = localStorage.getItem('academic-site-theme'); } catch (_) {}
+    if (saved) return;
+    root.setAttribute('data-theme', event.matches ? 'dark' : 'light');
+    paintThemeButton();
+  });
 
   toggle?.addEventListener('click', () => {
     const isOpen = nav.classList.toggle('open');

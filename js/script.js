@@ -12,7 +12,8 @@
   const paintThemeButton = () => {
     if (!themeBtn) return;
     const dark = root.getAttribute('data-theme') === 'dark';
-    themeBtn.textContent = dark ? '☀' : '☾';
+    //themeBtn.textContent = dark ? '☀' : '☾';
+    themeBtn.textContent = dark ? '☁' : '☀';
     themeBtn.setAttribute('aria-pressed', String(dark));
     const label = dark ? 'Switch to light mode' : 'Switch to dark mode';
     themeBtn.setAttribute('aria-label', label);

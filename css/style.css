@@ -146,7 +146,7 @@ body { top: 0 !important; }
   body { font-size: 12px; }
 }
 /* ---- dark mode ---- */
-.theme-toggle { border: 1px solid var(--line); background: var(--paper); color: var(--navy); width: 36px; height: 34px; border-radius: 0px; font-size: 17px; line-height: 1; cursor: pointer; }
+.theme-toggle { border: 1px solid var(--line); background: var(--paper); color: var(--navy); width: 36px; height: 34px; border-radius: 4px; font-size: 17px; line-height: 1; cursor: pointer; }
 .theme-toggle:hover { border-color: var(--accent); }
 .theme-toggle { display: inline-flex; align-items: center; justify-content: center; }
 .theme-toggle svg { display: block; }

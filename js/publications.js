@@ -50,7 +50,7 @@
       if (p.doi) details.push(`DOI: ${p.doi}`);
       if (details.length) { const detail = document.createElement('p'); detail.className = 'small-note'; detail.textContent = details.join(' · '); article.appendChild(detail); }
       const links = document.createElement('div'); links.className = 'text-links';
-      const candidates = [[p.url, 'PDF'], [p.pdf_url, 'PDF'], [p.doi_url || (p.doi ? `https://doi.org/${p.doi}` : ''), 'DOI'], [p.scholar_url, 'Google Scholar']];
+      const candidates = [[p.url, 'Paper'], [p.pdf_url, 'PDF'], [p.doi_url || (p.doi ? `https://doi.org/${p.doi}` : ''), 'DOI'], [p.scholar_url, 'Google Scholar']];
       candidates.forEach(([url,label]) => { const href = safeUrl(url); if (href) { const a = document.createElement('a'); a.href = href; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.textContent = label; links.appendChild(a); } });
       if (links.childElementCount) article.appendChild(links);
       list.appendChild(article);
